@@ -21,9 +21,9 @@ namespace EATestClient.Models
         public string PublisherName { get; set; }
         public string OfferName { get; set; }
         public string PlanName { get; set; }
-        public double? ConsumedQuantity { get; set; }
-        public double? ResourceRate { get; set; }
-        public double? ExtendedCost { get; set; }
+        public decimal? ConsumedQuantity { get; set; }
+        public decimal? ResourceRate { get; set; }
+        public decimal? ExtendedCost { get; set; }
         public string UnitOfMeasure { get; set; }
         public string InstanceId { get; set; }
         public string AdditionalInfo { get; set; }

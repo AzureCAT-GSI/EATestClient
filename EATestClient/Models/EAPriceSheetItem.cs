@@ -17,7 +17,7 @@ namespace EATestClient.Models
         /// <summary>
         /// The parsed unit of measure as integer
         /// </summary>
-        public double? UnitOfMeasureAsNumber {
+        public decimal? UnitOfMeasureAsNumber {
             get
             {
                 int retVal = 0;
@@ -61,10 +61,10 @@ namespace EATestClient.Models
             }
         }
         public string ConsumptionPartNumber { get; set; }
-        public double? ConsumptionPrice { get; set; }
+        public decimal? ConsumptionPrice { get; set; }
 
         public string PartNumber { get; set; }
-        public Double? UnitPrice { get; set; }
+        public decimal? UnitPrice { get; set; }
         public string CurrencyCode { get; set; }
     }
 }

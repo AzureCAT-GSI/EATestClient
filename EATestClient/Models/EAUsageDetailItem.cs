@@ -24,9 +24,9 @@ namespace EATestClient.Models
         public string MeterSubCategory { get; set; }
         public string MeterRegion { get; set; }
         public string MeterName { get; set; }
-        public double? ConsumedQuantity { get; set; }
-        public double? ResourceRate { get; set; }
-        public double? ExtendedCost { get; set; }
+        public decimal? ConsumedQuantity { get; set; }
+        public decimal? ResourceRate { get; set; }
+        public decimal? ExtendedCost { get; set; }
         public string ResourceLocation { get; set; }
         public string ConsumedService { get; set; }
         public string InstanceId { get; set; }

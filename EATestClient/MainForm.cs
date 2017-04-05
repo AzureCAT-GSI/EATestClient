@@ -16,6 +16,7 @@ using System.Net.Http;
 using EATestClient.Models;
 using EATestClient.Common;
 using EATestClient.Properties;
+using EATestClient.ViewModels;
 
 namespace EATestClient
 {
@@ -81,7 +82,7 @@ namespace EATestClient
             }
         }
 
-        private async void validateKey_Click(object sender, EventArgs e)
+        private async void getReportDataBtn_Click(object sender, EventArgs e)
         {
             ValidateInputForUsageList();
 
@@ -97,9 +98,9 @@ namespace EATestClient
                     //Parse the response and fill the usage list
                     fillUsageList(availReports);
                 }
-                catch
+                catch(Exception ex)
                 {
-                    //Could not parse the JSON
+                    MessageBox.Show($"An error occured getting report data::{ex.ToString()}");
                 }
             }
         }
@@ -144,6 +145,14 @@ namespace EATestClient
                     TreeNode sumRpt = monthNode.Nodes.Add(month.LinkToDownloadSummaryReport, UsageReportType.Summary.ToString());
                     sumRpt.ToolTipText = month.LinkToDownloadSummaryReport;
                 }
+
+                //Add the reconciliation nodes to the tree
+                TreeNode reconcileU2PNode = monthNode.Nodes.Add(UsageReportType.ReconcileUsageToPriceSheet.ToString(), UsageReportType.ReconcileUsageToPriceSheet.ToString());
+                reconcileU2PNode.ToolTipText = "Reconcile Usage to Price Sheet";
+
+                TreeNode reconcileS2PNode = monthNode.Nodes.Add(UsageReportType.ReconcileStoreChargeToPriceSheet.ToString(), UsageReportType.ReconcileStoreChargeToPriceSheet.ToString());
+                reconcileS2PNode.ToolTipText = "Reconcile Store to Price Sheet";
+
                 prevYear = curYear;
             }
         }
@@ -421,25 +430,188 @@ namespace EATestClient
                 //    //e.Node.Parent.Collapse(false);
                 //    e.Node.Expand();
                 //}
-                //Do work    
-                displayReportData(e.Node.Parent.Name, e.Node.Text, e.Node.Name);
+                //Do work
+                if (e.Node.Name == UsageReportType.ReconcileStoreChargeToPriceSheet.ToString() ||
+                    e.Node.Name == UsageReportType.ReconcileUsageToPriceSheet.ToString())
+                {
+                    //Find the detail link
+                    //TODO: Fix this lookup
+                    TreeNode detailNode = e.Node.Parent.Nodes[0];
+
+                    //find the price sheet link
+                    TreeNode priceNode = e.Node.Parent.Nodes[1];
+                    //Pass the MM, the detaill URL and the pricelist URL
+                    displayCombinedReportData(e.Node.Parent.Name, detailNode.Name, priceNode.Name);
+                }
+                else
+                {
+                    displayReportData(e.Node.Parent.Name, e.Node.Text, e.Node.Name);
+                }
             }
 
             e.Node.EnsureVisible();
         }
 
-        private async void displayReportData(string currentMonthReport, string reportType, string UrlToReport)
+        private async void displayCombinedReportData(string reportDate, string usageUrl, string priceListUrl)
+        {
+            using (new WaitCursor())
+            {
+                string urlToFetch = usageUrl;
+                DateTime currentReportDate = DateTime.Parse(reportDate);
+
+                //Get the detail JSON
+                string usageDataJson = await GetEnrollmentUsageByMonth(currentReportDate, UsageReportType.Detail, currentEnrollment, currentToken.Token, "json");
+                List<EAUsageDetailItem> detailItems = JsonConvert.DeserializeObject<List<EAUsageDetailItem>>(usageDataJson);
+
+                //Get the Pricing JSON
+                string pricingDataJson = await GetEnrollmentUsageByMonth(currentReportDate, UsageReportType.PriceSheet, currentEnrollment, currentToken.Token, "json");
+                List<EAPriceSheetItem> priceListItems = JsonConvert.DeserializeObject<List<EAPriceSheetItem>>(pricingDataJson);
+
+                List<EAPriceToActualReconcileVMItem> reconciledData = null;
+                if (currentReportDate.Year < 2016 && currentReportDate.Month < 12)
+                {
+                    reconciledData = combineUsageAndPricingPreDec2015(detailItems, priceListItems);
+                }
+                else
+                {
+                    reconciledData = combineUsageAndPricing(detailItems, priceListItems);
+                }
+
+                currentDataLabel.Text = $"Reconciling {currentReportDate.ToString("MMMM")}-{currentReportDate.Year}";
+                BindingSource dataToBind = new BindingSource();
+                dataToBind.DataSource = reconciledData;
+
+                try
+                {
+                    dataToBind.DataSource = reconciledData;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+
+                if (dataToBind != null)
+                {
+                    reconciledDataGrid.DataSource = dataToBind;
+                    reconciledDataGrid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+                    dataTabs.TabPages["combinedTab"].Select();
+                }
+            }
+        }
+        private List<EAPriceToActualReconcileVMItem> combineUsageAndPricing(List<EAUsageDetailItem> detailItems, List<EAPriceSheetItem> priceListItems)
+        {
+            List<EAPriceToActualReconcileVMItem> recItems = new List<EAPriceToActualReconcileVMItem>();
+           //For queries starting Dec-2015, this is valid 
+            var joinedData =
+                from priceSheetItem in priceListItems
+                join usageDetail in detailItems on priceSheetItem.Service equals usageDetail.Product into recItemsJoined
+                from usageItem in recItemsJoined.DefaultIfEmpty(new EAUsageDetailItem { Product = "NO USAGE" })
+                select new EAPriceToActualReconcileVMItem
+                {
+                    PriceListPartNumber = priceSheetItem.PartNumber,
+                    UsageMeterCategory = usageItem.MeterCategory,
+                    UsageMeterId = usageItem.MeterId,
+                    UsageMeterName = usageItem.MeterName,
+                    UsageMeterRegion = usageItem.MeterRegion,
+                    UsageMeterSubCategory = usageItem.MeterSubCategory,
+                    UsageProduct = usageItem.Product,
+                    PriceListService = priceSheetItem.Service,
+                    UsageConsumedService = usageItem.ConsumedService,
+                    PriceListUnitOfMeasureAsNumber = priceSheetItem.UnitOfMeasureAsNumber,
+                    PriceListUnitOfMeasureAsString = priceSheetItem.UnitOfMeasureAsString,
+                    UsageUnitOfMeasure = usageItem.UnitOfMeasure,
+                    PriceListUnitPrice = priceSheetItem.UnitPrice,
+                    UsageExtendedCost = usageItem.ExtendedCost,
+                    UsageConsumedQuantity = usageItem.ConsumedQuantity,
+                    CalculatedCost = (usageItem.ConsumedQuantity / priceSheetItem.UnitOfMeasureAsNumber) * priceSheetItem.UnitPrice,
+                };
+
+            //foreach (EAUsageDetailItem detail in detailItems)
+            //{
+            //    EAPriceToActualReconcileVMItem recItem = new EAPriceToActualReconcileVMItem();
+            //    recItem.PriceListUnitOfMeasureAsNumber = detail.ConsumedQuantity;
+            //    recItem.UsageExtendedCost = detail.ExtendedCost;
+            //    recItem.UsageMeterCategory = detail.MeterCategory;
+            //    recItem.UsageMeterSubCategory = detail.MeterSubCategory;
+            //    recItem.UsageMeterId = detail.MeterId;
+            //    recItem.UsageMeterName = detail.MeterName;
+            //    recItem.UsageMeterRegion = detail.MeterRegion;
+            //    recItem.UsageProduct = detail.Product;
+            //    recItem.UsageUnitOfMeasure = detail.UnitOfMeasure;
+            //    //Loop though the usage and find the matching product SKU, unit of measure and price
+            //    EAPriceSheetItem matchingPrice = priceListItems.FirstOrDefault(p => p.Service == detail.Product);
+
+            //    if (matchingPrice == null)
+            //    {
+            //        //No matching price found, flag the row
+            //        recItem.FoundOnPriceSheet = false;
+            //    }
+            //    else
+            //    {
+            //        recItem.FoundOnPriceSheet = true;
+            //        recItem.PriceListUnitOfMeasureAsNumber = matchingPrice.UnitOfMeasureAsNumber;
+            //        recItem.PriceListUnitOfMeasureAsString = matchingPrice.UnitOfMeasureAsString;
+            //        recItem.PriceListUnitPrice = matchingPrice.UnitPrice;
+            //        recItem.PriceListPartNumber = matchingPrice.PartNumber;
+            //        recItem.PriceListService = matchingPrice.Service;
+            //    }
+            //    recItems.Add(recItem);
+            //}
+
+            //Now check to see if we have items not used this month
+            //foreach(EAPriceSheetItem priceItem in priceListItems)
+            //{
+
+            //}
+            return joinedData.ToList();
+            //return recItems;
+        }
+
+        private List<EAPriceToActualReconcileVMItem> combineUsageAndPricingPreDec2015(List<EAUsageDetailItem> detailItems, List<EAPriceSheetItem> priceListItems)
+        {
+            List<EAPriceToActualReconcileVMItem> recItems = new List<EAPriceToActualReconcileVMItem>();
+            //For queries Pre Dec-2015, this use ConsumptionPartNumber as the join key
+            var joinedData =
+                from priceSheetItem in priceListItems
+                join usageDetail in detailItems on priceSheetItem.Service equals usageDetail.Product into recItemsJoined
+                from usageItem in recItemsJoined.DefaultIfEmpty(new EAUsageDetailItem { Product = "NO USAGE" })
+                select new EAPriceToActualReconcileVMItem
+                {
+                    PriceListPartNumber = priceSheetItem.PartNumber,
+                    UsageMeterCategory = usageItem.MeterCategory,
+                    UsageMeterId = usageItem.MeterId,
+                    UsageMeterName = usageItem.MeterName,
+                    UsageMeterRegion = usageItem.MeterRegion,
+                    UsageMeterSubCategory = usageItem.MeterSubCategory,
+                    UsageProduct = usageItem.Product,
+                    PriceListService = priceSheetItem.Service,
+                    UsageConsumedService = usageItem.ConsumedService,
+                    PriceListUnitOfMeasureAsNumber = priceSheetItem.UnitOfMeasureAsNumber,
+                    PriceListUnitOfMeasureAsString = priceSheetItem.UnitOfMeasureAsString,
+                    UsageUnitOfMeasure = usageItem.UnitOfMeasure,
+                    PriceListUnitPrice = priceSheetItem.UnitPrice,
+                    UsageExtendedCost = usageItem.ExtendedCost,
+                    UsageConsumedQuantity = usageItem.ConsumedQuantity,
+                    CalculatedCost = (usageItem.ConsumedQuantity / priceSheetItem.UnitOfMeasureAsNumber) * priceSheetItem.UnitPrice,
+                };
+
+            return joinedData.ToList();
+        }
+
+
+        private async void displayReportData(string reportDate, string reportType, string UrlToReport)
         {
             using (new WaitCursor())
             {
                 string urlToFetch = UrlToReport;
-                DateTime currentMonth = DateTime.Parse(currentMonthReport);
+                DateTime currentReportDate = DateTime.Parse(reportDate);
                 UsageReportType curType = (UsageReportType)Enum.Parse(typeof(UsageReportType), reportType);
 
-                string usageDataJson = await GetEnrollmentUsageByMonth(currentMonth, curType, currentEnrollment, currentToken.Token, "json");
+                string usageDataJson = await GetEnrollmentUsageByMonth(currentReportDate, curType, currentEnrollment, currentToken.Token, "json");
                 usageReportDataGrid.DataSource = null;
                 usageReportDataGrid.AutoGenerateColumns = true;
                 usageListJsonTx.Text = usageDataJson;
+                currentDataLabel.Text = $"{reportType} {currentReportDate.ToString("MMMM")}-{currentReportDate.Year}";
                 BindingSource dataToBind = new BindingSource();
 
                 switch (curType)
@@ -485,6 +657,32 @@ namespace EATestClient
                             }
                             break;
                         }
+                    case UsageReportType.ReconcileUsageToPriceSheet:
+                        {
+                            try
+                            {
+                                //For this case, we are combining 2 data sets. Get them both and then combine them
+                                dataToBind.DataSource = JsonConvert.DeserializeObject<List<EAUsageSummaryItem>>(usageDataJson);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.ToString());
+                            }
+                            break;
+                        }
+                    case UsageReportType.ReconcileStoreChargeToPriceSheet:
+                        {
+                            try
+                            {
+                                dataToBind.DataSource = JsonConvert.DeserializeObject<List<EAUsageSummaryItem>>(usageDataJson);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.ToString());
+                            }
+                            break;
+                        }
+
                 }
                 if (dataToBind != null)
                 {

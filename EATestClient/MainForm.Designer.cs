@@ -30,17 +30,19 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.currentDataLabel = new System.Windows.Forms.Label();
             this.dataTabs = new System.Windows.Forms.TabControl();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.dataTab = new System.Windows.Forms.TabPage();
             this.usageReportDataGrid = new System.Windows.Forms.DataGridView();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.rawJsonTab = new System.Windows.Forms.TabPage();
             this.usageListJsonTx = new System.Windows.Forms.TextBox();
+            this.combinedTab = new System.Windows.Forms.TabPage();
             this.availReportTree = new System.Windows.Forms.TreeView();
             this.label10 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label9 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.validateKey = new System.Windows.Forms.Button();
+            this.getReportDataBtn = new System.Windows.Forms.Button();
             this.accessKeyTx = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.enrollmentTx = new System.Windows.Forms.TextBox();
@@ -61,21 +63,22 @@
             this.label5 = new System.Windows.Forms.Label();
             this.enrollmentMonthTx = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.reconciledDataGrid = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.dataTabs.SuspendLayout();
-            this.tabPage3.SuspendLayout();
+            this.dataTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.usageReportDataGrid)).BeginInit();
-            this.tabPage4.SuspendLayout();
+            this.rawJsonTab.SuspendLayout();
+            this.combinedTab.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.reconciledDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Enabled = false;
             this.tabControl1.Location = new System.Drawing.Point(13, 13);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -84,13 +87,14 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.currentDataLabel);
             this.tabPage1.Controls.Add(this.dataTabs);
             this.tabPage1.Controls.Add(this.availReportTree);
             this.tabPage1.Controls.Add(this.label10);
             this.tabPage1.Controls.Add(this.linkLabel1);
             this.tabPage1.Controls.Add(this.label9);
             this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.validateKey);
+            this.tabPage1.Controls.Add(this.getReportDataBtn);
             this.tabPage1.Controls.Add(this.accessKeyTx);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.enrollmentTx);
@@ -103,49 +107,61 @@
             this.tabPage1.Text = "UsageList";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // currentDataLabel
+            // 
+            this.currentDataLabel.AutoSize = true;
+            this.currentDataLabel.Location = new System.Drawing.Point(388, 64);
+            this.currentDataLabel.Name = "currentDataLabel";
+            this.currentDataLabel.Size = new System.Drawing.Size(0, 13);
+            this.currentDataLabel.TabIndex = 17;
+            // 
             // dataTabs
             // 
-            this.dataTabs.Controls.Add(this.tabPage3);
-            this.dataTabs.Controls.Add(this.tabPage4);
-            this.dataTabs.Controls.Add(this.tabPage5);
-            this.dataTabs.Location = new System.Drawing.Point(307, 92);
+            this.dataTabs.Controls.Add(this.dataTab);
+            this.dataTabs.Controls.Add(this.rawJsonTab);
+            this.dataTabs.Controls.Add(this.combinedTab);
+            this.dataTabs.Location = new System.Drawing.Point(289, 92);
             this.dataTabs.Name = "dataTabs";
             this.dataTabs.SelectedIndex = 0;
-            this.dataTabs.Size = new System.Drawing.Size(753, 458);
+            this.dataTabs.Size = new System.Drawing.Size(768, 490);
             this.dataTabs.TabIndex = 16;
             // 
-            // tabPage3
+            // dataTab
             // 
-            this.tabPage3.Controls.Add(this.usageReportDataGrid);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(745, 432);
-            this.tabPage3.TabIndex = 0;
-            this.tabPage3.Text = "Data";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.dataTab.Controls.Add(this.usageReportDataGrid);
+            this.dataTab.Location = new System.Drawing.Point(4, 22);
+            this.dataTab.Name = "dataTab";
+            this.dataTab.Padding = new System.Windows.Forms.Padding(3);
+            this.dataTab.Size = new System.Drawing.Size(760, 464);
+            this.dataTab.TabIndex = 0;
+            this.dataTab.Text = "Data";
+            this.dataTab.UseVisualStyleBackColor = true;
             // 
             // usageReportDataGrid
             // 
             this.usageReportDataGrid.AllowUserToAddRows = false;
             this.usageReportDataGrid.AllowUserToDeleteRows = false;
+            this.usageReportDataGrid.AllowUserToResizeRows = false;
             this.usageReportDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.usageReportDataGrid.Location = new System.Drawing.Point(6, 6);
+            this.usageReportDataGrid.MultiSelect = false;
             this.usageReportDataGrid.Name = "usageReportDataGrid";
             this.usageReportDataGrid.ReadOnly = true;
-            this.usageReportDataGrid.Size = new System.Drawing.Size(733, 420);
+            this.usageReportDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.usageReportDataGrid.ShowEditingIcon = false;
+            this.usageReportDataGrid.Size = new System.Drawing.Size(748, 452);
             this.usageReportDataGrid.TabIndex = 0;
             // 
-            // tabPage4
+            // rawJsonTab
             // 
-            this.tabPage4.Controls.Add(this.usageListJsonTx);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(745, 432);
-            this.tabPage4.TabIndex = 1;
-            this.tabPage4.Text = "Raw response";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.rawJsonTab.Controls.Add(this.usageListJsonTx);
+            this.rawJsonTab.Location = new System.Drawing.Point(4, 22);
+            this.rawJsonTab.Name = "rawJsonTab";
+            this.rawJsonTab.Padding = new System.Windows.Forms.Padding(3);
+            this.rawJsonTab.Size = new System.Drawing.Size(760, 464);
+            this.rawJsonTab.TabIndex = 1;
+            this.rawJsonTab.Text = "Raw response";
+            this.rawJsonTab.UseVisualStyleBackColor = true;
             // 
             // usageListJsonTx
             // 
@@ -154,21 +170,31 @@
             this.usageListJsonTx.Name = "usageListJsonTx";
             this.usageListJsonTx.ReadOnly = true;
             this.usageListJsonTx.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.usageListJsonTx.Size = new System.Drawing.Size(733, 420);
+            this.usageListJsonTx.Size = new System.Drawing.Size(748, 452);
             this.usageListJsonTx.TabIndex = 7;
+            // 
+            // combinedTab
+            // 
+            this.combinedTab.Controls.Add(this.reconciledDataGrid);
+            this.combinedTab.Location = new System.Drawing.Point(4, 22);
+            this.combinedTab.Name = "combinedTab";
+            this.combinedTab.Size = new System.Drawing.Size(760, 464);
+            this.combinedTab.TabIndex = 2;
+            this.combinedTab.Text = "Combined";
+            this.combinedTab.UseVisualStyleBackColor = true;
             // 
             // availReportTree
             // 
-            this.availReportTree.Location = new System.Drawing.Point(21, 108);
+            this.availReportTree.Location = new System.Drawing.Point(24, 92);
             this.availReportTree.Name = "availReportTree";
-            this.availReportTree.Size = new System.Drawing.Size(242, 442);
+            this.availReportTree.Size = new System.Drawing.Size(242, 490);
             this.availReportTree.TabIndex = 15;
             this.availReportTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.availReportTree_NodeMouseClick);
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(18, 92);
+            this.label10.Location = new System.Drawing.Point(21, 64);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(120, 13);
             this.label10.TabIndex = 13;
@@ -177,7 +203,7 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(338, 32);
+            this.linkLabel1.Location = new System.Drawing.Point(289, 32);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(175, 13);
             this.linkLabel1.TabIndex = 11;
@@ -188,7 +214,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(120, 32);
+            this.label9.Location = new System.Drawing.Point(123, 32);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(143, 13);
             this.label9.TabIndex = 10;
@@ -197,33 +223,33 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(338, 56);
+            this.label3.Location = new System.Drawing.Point(289, 64);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(80, 13);
+            this.label3.Size = new System.Drawing.Size(97, 13);
             this.label3.TabIndex = 7;
-            this.label3.Text = "Json Response";
+            this.label3.Text = "Displaying data for:";
             // 
-            // validateKey
+            // getReportDataBtn
             // 
-            this.validateKey.Location = new System.Drawing.Point(972, 7);
-            this.validateKey.Name = "validateKey";
-            this.validateKey.Size = new System.Drawing.Size(88, 23);
-            this.validateKey.TabIndex = 5;
-            this.validateKey.Text = "Send Request";
-            this.validateKey.UseVisualStyleBackColor = true;
-            this.validateKey.Click += new System.EventHandler(this.validateKey_Click);
+            this.getReportDataBtn.Location = new System.Drawing.Point(972, 7);
+            this.getReportDataBtn.Name = "getReportDataBtn";
+            this.getReportDataBtn.Size = new System.Drawing.Size(88, 23);
+            this.getReportDataBtn.TabIndex = 5;
+            this.getReportDataBtn.Text = "Get Reports";
+            this.getReportDataBtn.UseVisualStyleBackColor = true;
+            this.getReportDataBtn.Click += new System.EventHandler(this.getReportDataBtn_Click);
             // 
             // accessKeyTx
             // 
-            this.accessKeyTx.Location = new System.Drawing.Point(341, 9);
+            this.accessKeyTx.Location = new System.Drawing.Point(361, 9);
             this.accessKeyTx.Name = "accessKeyTx";
-            this.accessKeyTx.Size = new System.Drawing.Size(609, 20);
+            this.accessKeyTx.Size = new System.Drawing.Size(605, 20);
             this.accessKeyTx.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(269, 12);
+            this.label2.Location = new System.Drawing.Point(289, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(66, 13);
             this.label2.TabIndex = 2;
@@ -231,15 +257,15 @@
             // 
             // enrollmentTx
             // 
-            this.enrollmentTx.Location = new System.Drawing.Point(123, 9);
+            this.enrollmentTx.Location = new System.Drawing.Point(126, 9);
             this.enrollmentTx.Name = "enrollmentTx";
-            this.enrollmentTx.Size = new System.Drawing.Size(100, 20);
+            this.enrollmentTx.Size = new System.Drawing.Size(140, 20);
             this.enrollmentTx.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 12);
+            this.label1.Location = new System.Drawing.Point(21, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(99, 13);
             this.label1.TabIndex = 0;
@@ -413,14 +439,21 @@
             this.label6.TabIndex = 8;
             this.label6.Text = "Enrollment Number:";
             // 
-            // tabPage5
+            // reconciledDataGrid
             // 
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(745, 432);
-            this.tabPage5.TabIndex = 2;
-            this.tabPage5.Text = "Reconciled";
-            this.tabPage5.UseVisualStyleBackColor = true;
+            this.reconciledDataGrid.AllowUserToAddRows = false;
+            this.reconciledDataGrid.AllowUserToDeleteRows = false;
+            this.reconciledDataGrid.AllowUserToOrderColumns = true;
+            this.reconciledDataGrid.AllowUserToResizeRows = false;
+            this.reconciledDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.reconciledDataGrid.Location = new System.Drawing.Point(4, 4);
+            this.reconciledDataGrid.Name = "reconciledDataGrid";
+            this.reconciledDataGrid.ReadOnly = true;
+            this.reconciledDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.reconciledDataGrid.ShowEditingIcon = false;
+            this.reconciledDataGrid.ShowRowErrors = false;
+            this.reconciledDataGrid.Size = new System.Drawing.Size(753, 460);
+            this.reconciledDataGrid.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -434,12 +467,14 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.dataTabs.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
+            this.dataTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.usageReportDataGrid)).EndInit();
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
+            this.rawJsonTab.ResumeLayout(false);
+            this.rawJsonTab.PerformLayout();
+            this.combinedTab.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.reconciledDataGrid)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -449,7 +484,7 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button validateKey;
+        private System.Windows.Forms.Button getReportDataBtn;
         private System.Windows.Forms.TextBox accessKeyTx;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox enrollmentTx;
@@ -475,11 +510,13 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TreeView availReportTree;
         private System.Windows.Forms.TabControl dataTabs;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage dataTab;
         private System.Windows.Forms.DataGridView usageReportDataGrid;
-        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage rawJsonTab;
         private System.Windows.Forms.TextBox usageListJsonTx;
-        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.TabPage combinedTab;
+        private System.Windows.Forms.Label currentDataLabel;
+        private System.Windows.Forms.DataGridView reconciledDataGrid;
     }
 }
 
