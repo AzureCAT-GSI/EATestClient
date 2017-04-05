@@ -1,0 +1,82 @@
+[
+  {
+    "Azure Service Commitment": "Beginning Balance",
+    "Currency Code": "USD",
+    "Amount": "0"
+  },
+  {
+    "Azure Service Commitment": "New Purchases",
+    "Currency Code": "USD",
+    "Amount": "0"
+  },
+  {
+    "Azure Service Commitment": "Adjustments",
+    "Currency Code": "USD",
+    "Amount": "0"
+  },
+  {
+    "Azure Service Commitment": "Utilized ( subtracted from balance)",
+    "Currency Code": "USD",
+    "Amount": "0"
+  },
+  {
+    "Azure Service Commitment": "Ending Balance",
+    "Currency Code": "USD",
+    "Amount": "0"
+  },
+  {
+    "Azure Service Commitment": "Overage",
+    "Currency Code": "",
+    "Amount": ""
+  },
+  {
+    "Azure Service Commitment": "Service Overage",
+    "Currency Code": "USD",
+    "Amount": "12353.35"
+  },
+  {
+    "Azure Service Commitment": "Charges Billed Separately",
+    "Currency Code": "USD",
+    "Amount": "237.50"
+  },
+  {
+    "Azure Service Commitment": "Total Overage",
+    "Currency Code": "USD",
+    "Amount": "12590.85"
+  },
+  {
+    "Azure Service Commitment": "Total Usage (Commitment Utilized + Overage)",
+    "Currency Code": "USD",
+    "Amount": "12590.85"
+  },
+  {
+    "Azure Service Commitment": "Azure Marketplace Service Charges <br /> (Billed Separately)",
+    "Currency Code": "USD",
+    "Amount": "5174.00"
+  },
+  {
+    "Azure Service Commitment": "Report Generation Date",
+    "Currency Code": "",
+    "Amount": "3/4/2017"
+  },
+  {
+    "Azure Service Commitment": "",
+    "Currency Code": "",
+    "Amount": ""
+  },
+  {
+    "Azure Service Commitment": "New Purchases Details",
+    "Currency Code": "",
+    "Amount": ""
+  },
+  {
+    "Azure Service Commitment": "",
+    "Currency Code": "",
+    "Amount": ""
+  },
+  {
+    "Azure Service Commitment": "Adjustments Details",
+    "Currency Code": "",
+    "Amount": ""
+  }
+]
