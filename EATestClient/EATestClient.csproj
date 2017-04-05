@@ -91,10 +91,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\AzureRateCard.cs" />
     <Compile Include="Calculator\HourlyCalculator.cs" />
     <Compile Include="Calculator\IUsageCalculator.cs" />
+    <Compile Include="Models\AzureOfferCode.cs" />
     <Compile Include="Common\BearerToken.cs" />
     <Compile Include="Common\RuntimeConstants.cs" />
+    <Compile Include="Common\Utils.cs" />
     <Compile Include="EATestClient.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -127,6 +130,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

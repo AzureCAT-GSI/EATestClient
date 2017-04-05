@@ -10,12 +10,13 @@ namespace EATestClient.Models
 {
     public class EAUsageSummaryItem
     {
-        [JsonProperty(PropertyName="Azure Service Commitment")]
+        public string Amount { get; set; }
+
+        [JsonProperty(PropertyName = "Azure Service Commitment")]
         public string AzureServiceCommitment { get; set; }
 
         [JsonProperty(PropertyName="Currency Code")]
         public string CurrencyCode { get; set; }
-        public string Amount { get; set; }
     }
 }
 

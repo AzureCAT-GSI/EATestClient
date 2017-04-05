@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -17,6 +16,7 @@ using EATestClient.Models;
 using EATestClient.Common;
 using EATestClient.Properties;
 using EATestClient.ViewModels;
+using System.Net.Http.Headers;
 
 namespace EATestClient
 {
@@ -73,6 +73,7 @@ namespace EATestClient
             {
                 currentToken = BearerToken.FromJwt(jwt);
                 accessKeyTx.Text = currentToken.Token;
+                accessKeyMonthTx.Text = currentToken.Token;
             }
 
             currentEnrollment = curSettings["EnrollmentNumber"]?.ToString();
@@ -459,6 +460,9 @@ namespace EATestClient
                 string urlToFetch = usageUrl;
                 DateTime currentReportDate = DateTime.Parse(reportDate);
 
+                //Clear the old data
+                reconciledDataGrid.DataSource = null;
+
                 //Get the detail JSON
                 string usageDataJson = await GetEnrollmentUsageByMonth(currentReportDate, UsageReportType.Detail, currentEnrollment, currentToken.Token, "json");
                 List<EAUsageDetailItem> detailItems = JsonConvert.DeserializeObject<List<EAUsageDetailItem>>(usageDataJson);
@@ -466,6 +470,19 @@ namespace EATestClient
                 //Get the Pricing JSON
                 string pricingDataJson = await GetEnrollmentUsageByMonth(currentReportDate, UsageReportType.PriceSheet, currentEnrollment, currentToken.Token, "json");
                 List<EAPriceSheetItem> priceListItems = JsonConvert.DeserializeObject<List<EAPriceSheetItem>>(pricingDataJson);
+
+                //Get Azure Prices
+                string subscriptionId = "";
+                string tenantId = "72f988bf-86f1-41af-91ab-2d7cd011db47";
+                string clientId = "75c58637-3c74-4d20-8ffa-8a7c8f018d6c";
+                string clientSecret = "aXFuF1eIjFEQhkdW6asmeJyI1t5iIgiAWDXKy4JUHiU=";
+                string resourceUri = "75c58637-3c74-4d20-8ffa-8a7c8f018d6c";
+                BearerToken bears = Utils.GetAccessTokenFromAAD(tenantId, clientId, clientSecret, resourceUri).Result;
+
+                string azurePricingJson = await GetAzureRateCard(bears, subscriptionId, Utils.GetOfferCodes()[0], "USD", "en-US", "US");
+                List<AzureRateCard> azurePrices = JsonConvert.DeserializeObject<List<AzureRateCard>>(azurePricingJson);
+
+
 
                 List<EAPriceToActualReconcileVMItem> reconciledData = null;
                 if (currentReportDate.Year < 2016 && currentReportDate.Month < 12)
@@ -478,26 +495,47 @@ namespace EATestClient
                 }
 
                 currentDataLabel.Text = $"Reconciling {currentReportDate.ToString("MMMM")}-{currentReportDate.Year}";
-                BindingSource dataToBind = new BindingSource();
-                dataToBind.DataSource = reconciledData;
+                dataTabBindingSource.DataSource = reconciledData;
+                reconciledDataGrid.DataSource = dataTabBindingSource;
+                reconciledDataGrid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+                dataTabs.SelectedTab = dataTabs.TabPages["combinedTab"];
+            }
+        }
+
+        private async Task<string> GetAzureRateCard(BearerToken bears, string subscriptionId, AzureOfferCode azureOfferCode, string currency, string locale, string region)
+        {
+            string rateCardApiVersion = "2015-06-01-preview";
+            string rateCardUrl = $"/subscriptions/{subscriptionId}/providers/Microsoft.Commerce/RateCard?api-version={rateCardApiVersion}&$filter=OfferDurableId eq '{azureOfferCode.OfferName}' and Currency eq '{currency}' and Locale eq '{locale}' and RegionInfo eq '{region}'";
+
+            HttpResponseMessage response = null;
+            string responseMsg = string.Empty;
+            using (HttpClient client = new HttpClient())
+            {
+                //client.BaseAddress = new Uri($"https://management.azure.com/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 try
                 {
-                    dataToBind.DataSource = reconciledData;
+                    response = await client.GetAsync(rateCardUrl);
+                    if (response.StatusCode.Equals(HttpStatusCode.OK))
+                    {
+                        responseMsg = await response.Content.ReadAsStringAsync();
+                    }
                 }
-                catch (Exception ex)
+                catch (HttpRequestException ex)
                 {
-                    MessageBox.Show(ex.ToString());
+                    response.StatusCode = HttpStatusCode.BadRequest;
                 }
-
-                if (dataToBind != null)
+                catch (Exception ex2)
                 {
-                    reconciledDataGrid.DataSource = dataToBind;
-                    reconciledDataGrid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
-                    dataTabs.TabPages["combinedTab"].Select();
+                    //TODO: Show a meessage
                 }
             }
+            return responseMsg;
         }
+
+
         private List<EAPriceToActualReconcileVMItem> combineUsageAndPricing(List<EAUsageDetailItem> detailItems, List<EAPriceSheetItem> priceListItems)
         {
             List<EAPriceToActualReconcileVMItem> recItems = new List<EAPriceToActualReconcileVMItem>();
@@ -612,7 +650,6 @@ namespace EATestClient
                 usageReportDataGrid.AutoGenerateColumns = true;
                 usageListJsonTx.Text = usageDataJson;
                 currentDataLabel.Text = $"{reportType} {currentReportDate.ToString("MMMM")}-{currentReportDate.Year}";
-                BindingSource dataToBind = new BindingSource();
 
                 switch (curType)
                 {
@@ -620,7 +657,7 @@ namespace EATestClient
                         {
                             try
                             {
-                                dataToBind.DataSource = JsonConvert.DeserializeObject<List<EAUsageDetailItem>>(usageDataJson);
+                                dataTabBindingSource.DataSource = JsonConvert.DeserializeObject<List<EAUsageDetailItem>>(usageDataJson);
                             }
                             catch (Exception ex)
                             {
@@ -632,7 +669,7 @@ namespace EATestClient
                         {
                             try
                             {
-                                dataToBind.DataSource = JsonConvert.DeserializeObject<List<EAPriceSheetItem>>(usageDataJson);
+                                dataTabBindingSource.DataSource = JsonConvert.DeserializeObject<List<EAPriceSheetItem>>(usageDataJson);
                             }
                             catch (Exception ex)
                             {
@@ -642,14 +679,14 @@ namespace EATestClient
                         }
                     case UsageReportType.StoreCharge:
                         {
-                            dataToBind.DataSource = JsonConvert.DeserializeObject<List<EAStoreChargeItem>>(usageDataJson);
+                            dataTabBindingSource.DataSource = JsonConvert.DeserializeObject<List<EAStoreChargeItem>>(usageDataJson);
                             break;
                         }
                     case UsageReportType.Summary:
                         {
                             try
                             {
-                                dataToBind.DataSource = JsonConvert.DeserializeObject<List<EAUsageSummaryItem>>(usageDataJson);
+                                dataTabBindingSource.DataSource = JsonConvert.DeserializeObject<List<EAUsageSummaryItem>>(usageDataJson);
                             }
                             catch(Exception ex)
                             {
@@ -662,7 +699,7 @@ namespace EATestClient
                             try
                             {
                                 //For this case, we are combining 2 data sets. Get them both and then combine them
-                                dataToBind.DataSource = JsonConvert.DeserializeObject<List<EAUsageSummaryItem>>(usageDataJson);
+                                dataTabBindingSource.DataSource = JsonConvert.DeserializeObject<List<EAUsageSummaryItem>>(usageDataJson);
                             }
                             catch (Exception ex)
                             {
@@ -674,7 +711,7 @@ namespace EATestClient
                         {
                             try
                             {
-                                dataToBind.DataSource = JsonConvert.DeserializeObject<List<EAUsageSummaryItem>>(usageDataJson);
+                                dataTabBindingSource.DataSource = JsonConvert.DeserializeObject<List<EAUsageSummaryItem>>(usageDataJson);
                             }
                             catch (Exception ex)
                             {
@@ -684,10 +721,24 @@ namespace EATestClient
                         }
 
                 }
-                if (dataToBind != null)
+
+                usageReportDataGrid.DataSource = dataTabBindingSource;
+                usageReportDataGrid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+                dataTabs.SelectedTab = dataTabs.TabPages["detailTab"];
+            }
+        }
+
+        private void reconciledDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int currentRowIndex = e.RowIndex;
+            //Ensure they are not clicking on an empty grid
+            if (reconciledDataGrid.RowCount > 1 && currentRowIndex > 0)
+            {
+                //Grab the current Item and display a popup
+                EAPriceToActualReconcileVMItem currentItem = reconciledDataGrid.Rows[currentRowIndex].DataBoundItem as EAPriceToActualReconcileVMItem;
+                if (currentItem != null)
                 {
-                    usageReportDataGrid.DataSource = dataToBind;
-                    usageReportDataGrid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+
                 }
             }
         }

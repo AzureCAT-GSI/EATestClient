@@ -12,10 +12,31 @@ namespace EATestClient.Models
         {
 
         }
+        public string ConsumptionPartNumber { get; set; }
+        public decimal? ConsumptionPrice { get; set; }
+        /// <summary>
+        /// The currency used in your current billing period.
+        /// </summary>
+        public string CurrencyCode { get; set; }
+
+        /// <summary>
+        /// Identifies the unique system identifier for each Azure resource. AKA SKU
+        /// </summary>
+        public string PartNumber { get; set; }
+
+        /// <summary>
+        /// An Azure service name, such as Storage or Virtual Machines. Service names are created by product teams that own the service.
+        /// </summary>
         public string Service { get; set; }
+        /// <summary>
+        /// The basis of measurement for a service. Some common units of measurements are:
+        /// GB Gigabytes are the unit of measure for Storage
+        /// Compute Hours Virtual Machines and Cloud Services Compute measure hours of use
+        /// Database Days SQL Server measures instances in database days
+        /// </summary>
         public string UnitOfMeasure { get; set; }
         /// <summary>
-        /// The parsed unit of measure as integer
+        /// The parsed unit of measure as a decimal. Returns just the raw number
         /// </summary>
         public decimal? UnitOfMeasureAsNumber {
             get
@@ -41,6 +62,9 @@ namespace EATestClient.Models
                 return retVal;
             }
         }
+        /// <summary>
+        /// The parsed unit of measure as a string.Returns just the Unit (GB, Hours, Days, etc)
+        /// </summary>
         public string UnitOfMeasureAsString
         {
             get
@@ -60,11 +84,9 @@ namespace EATestClient.Models
                 return retVal;
             }
         }
-        public string ConsumptionPartNumber { get; set; }
-        public decimal? ConsumptionPrice { get; set; }
-
-        public string PartNumber { get; set; }
+        /// <summary>
+        /// Identifies the Unit that the service is charged in. For example, GB, hours, 10,000s.
+        /// </summary>
         public decimal? UnitPrice { get; set; }
-        public string CurrencyCode { get; set; }
     }
 }

@@ -9,10 +9,10 @@ namespace EATestClient.Models
 {
     public class EAUsageAvailableMonth
     {
-        public string Month { get; set; }
-        public string LinkToDownloadSummaryReport { get; set; }
         public string LinkToDownloadDetailReport { get; set; }
-        public string LinkToDownloadStoreChargeReport { get; set; }
         public string LinkToDownloadPriceSheetReport { get; set; }
+        public string LinkToDownloadStoreChargeReport { get; set; }
+        public string LinkToDownloadSummaryReport { get; set; }
+        public string Month { get; set; }
     }
 }

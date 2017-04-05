@@ -8,8 +8,8 @@ namespace EATestClient.Models
 {
     public class EAPriceSheet
     {
-        public DateTime StartDate = System.DateTime.UtcNow;
         public DateTime EndDate = System.DateTime.UtcNow;
         public List<EAPriceSheetItem> PriceListItems = new List<EAPriceSheetItem>();
+        public DateTime StartDate = System.DateTime.UtcNow;
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,12 @@ namespace EATestClient.Common
     public class BearerToken
     {
         public BearerToken() { }
+
+        public string token_type { get; set; }
+        public string expires_in { get; set; }
+        public string expires_on { get; set; }
+        public string resource { get; set; }
+
 
         public static BearerToken Parse(string tokenHeader)
         {
@@ -27,17 +34,18 @@ namespace EATestClient.Common
             return Parse(bearerToken);
         }
 
+        [JsonProperty(PropertyName = "access_token")]
         public string Token
         {
             get;
-            private set;
+            internal set;
         }
+
 
         public string BearerTokenHeader
         {
             get;
-            private set;
+            internal set;
         }
-
     }
 }
