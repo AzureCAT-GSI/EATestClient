@@ -21,7 +21,6 @@ namespace EATestClient.ViewModels
         public string UsageMeterRegion { get; internal set; }
         public string UsageProduct { get; internal set; }
         public string UsageUnitOfMeasure { get; internal set; }
-        public bool FoundOnPriceSheet { get; internal set; }
         public string PriceListUnitOfMeasureAsString { get; internal set; }
         public decimal? PriceListUnitPrice { get; internal set; }
         public string PriceListPartNumber { get; internal set; }

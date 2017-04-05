@@ -38,14 +38,17 @@ namespace EATestClient.Common
         public string Token
         {
             get;
-            internal set;
+            set;
         }
 
 
         public string BearerTokenHeader
         {
-            get;
-            internal set;
+            get
+            {
+                return $"bearer {Token}";
+            }
+            set {}
         }
     }
 }

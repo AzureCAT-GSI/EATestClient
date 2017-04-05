@@ -29,6 +29,12 @@ namespace EATestClient
         string currentEnrollment = string.Empty;
         BearerToken currentToken = null;
         byte[] reportBytes;
+        string subscriptionId = "";
+        string aadTenantId = "";
+        string aadClientId = "";
+        string aadClientSecret = "";
+        string aadAppId = "";
+
 
         public MainForm()
         {
@@ -81,6 +87,12 @@ namespace EATestClient
             {
                 enrollmentTx.Text = currentEnrollment;
             }
+
+            subscriptionId = curSettings["SubscriptionId"]?.ToString();
+            aadTenantId = curSettings["AADtenantId"]?.ToString();
+            aadClientId = curSettings["AADClientId"]?.ToString();
+            aadClientSecret = curSettings["AADClientSecret"]?.ToString();
+            aadAppId = curSettings["AADAppId"]?.ToString();
         }
 
         private async void getReportDataBtn_Click(object sender, EventArgs e)
@@ -471,20 +483,16 @@ namespace EATestClient
                 string pricingDataJson = await GetEnrollmentUsageByMonth(currentReportDate, UsageReportType.PriceSheet, currentEnrollment, currentToken.Token, "json");
                 List<EAPriceSheetItem> priceListItems = JsonConvert.DeserializeObject<List<EAPriceSheetItem>>(pricingDataJson);
 
+                //TODO
                 //Get Azure Prices
-                string subscriptionId = "";
-                string tenantId = "72f988bf-86f1-41af-91ab-2d7cd011db47";
-                string clientId = "75c58637-3c74-4d20-8ffa-8a7c8f018d6c";
-                string clientSecret = "aXFuF1eIjFEQhkdW6asmeJyI1t5iIgiAWDXKy4JUHiU=";
-                string resourceUri = "75c58637-3c74-4d20-8ffa-8a7c8f018d6c";
-                BearerToken bears = Utils.GetAccessTokenFromAAD(tenantId, clientId, clientSecret, resourceUri).Result;
+                //BearerToken bears = Utils.GetAccessTokenFromAAD(aadTenantId, aadClientId, aadClientSecret, aadAppId).Result;
 
-                string azurePricingJson = await GetAzureRateCard(bears, subscriptionId, Utils.GetOfferCodes()[0], "USD", "en-US", "US");
-                List<AzureRateCard> azurePrices = JsonConvert.DeserializeObject<List<AzureRateCard>>(azurePricingJson);
-
+                //string azurePricingJson = await GetAzureRateCard(bears, subscriptionId, Utils.GetOfferCodes()[0], "USD", "en-US", "US");
+                //List<AzureRateCard> azurePrices = JsonConvert.DeserializeObject<List<AzureRateCard>>(azurePricingJson);
 
 
                 List<EAPriceToActualReconcileVMItem> reconciledData = null;
+                reconciledDataGrid.DataSource = null;
                 if (currentReportDate.Year < 2016 && currentReportDate.Month < 12)
                 {
                     reconciledData = combineUsageAndPricingPreDec2015(detailItems, priceListItems);
@@ -495,8 +503,8 @@ namespace EATestClient
                 }
 
                 currentDataLabel.Text = $"Reconciling {currentReportDate.ToString("MMMM")}-{currentReportDate.Year}";
-                dataTabBindingSource.DataSource = reconciledData;
-                reconciledDataGrid.DataSource = dataTabBindingSource;
+                //dataTabBindingSource.DataSource = reconciledData;
+                reconciledDataGrid.DataSource = reconciledData;
                 reconciledDataGrid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
                 dataTabs.SelectedTab = dataTabs.TabPages["combinedTab"];
             }
@@ -505,16 +513,15 @@ namespace EATestClient
         private async Task<string> GetAzureRateCard(BearerToken bears, string subscriptionId, AzureOfferCode azureOfferCode, string currency, string locale, string region)
         {
             string rateCardApiVersion = "2015-06-01-preview";
-            string rateCardUrl = $"/subscriptions/{subscriptionId}/providers/Microsoft.Commerce/RateCard?api-version={rateCardApiVersion}&$filter=OfferDurableId eq '{azureOfferCode.OfferName}' and Currency eq '{currency}' and Locale eq '{locale}' and RegionInfo eq '{region}'";
+            string rateCardUrl = $@"https://management.azure.com//subscriptions//{subscriptionId}//providers//Microsoft.Commerce//RateCard?api-version={rateCardApiVersion}&$filter=OfferDurableId eq '{azureOfferCode.OfferName}' and Currency eq '{currency}' and Locale eq '{locale}' and RegionInfo eq '{region}'";
 
             HttpResponseMessage response = null;
             string responseMsg = string.Empty;
             using (HttpClient client = new HttpClient())
             {
-                //client.BaseAddress = new Uri($"https://management.azure.com/");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
+                client.DefaultRequestHeaders.Add("Authorization", bears.BearerTokenHeader);
                 try
                 {
                     response = await client.GetAsync(rateCardUrl);

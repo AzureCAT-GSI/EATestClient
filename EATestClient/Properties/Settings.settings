@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="UsageDownloadRestfulSampleClient.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="EATestClient.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="AccessKey" Type="System.String" Scope="User">
@@ -7,6 +7,26 @@
     </Setting>
     <Setting Name="EnrollmentNumber" Type="System.String" Scope="User">
       <Value Profile="(Default)">100</Value>
+    </Setting>
+    <Setting Name="SubscriptionId" Type="System.String" Scope="User">
+      <Value Profile="(Default)">
+        </Value>
+    </Setting>
+    <Setting Name="AADtenantId" Type="System.String" Scope="User">
+      <Value Profile="(Default)">
+        </Value>
+    </Setting>
+    <Setting Name="AADClientId" Type="System.String" Scope="User">
+      <Value Profile="(Default)">
+        </Value>
+    </Setting>
+    <Setting Name="AADClientSecret" Type="System.String" Scope="User">
+      <Value Profile="(Default)">
+        </Value>
+    </Setting>
+    <Setting Name="AADAppId" Type="System.String" Scope="User">
+      <Value Profile="(Default)">
+        </Value>
     </Setting>
   </Settings>
 </SettingsFile>

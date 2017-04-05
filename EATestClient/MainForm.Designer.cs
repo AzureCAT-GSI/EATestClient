@@ -35,10 +35,12 @@
             this.dataTabs = new System.Windows.Forms.TabControl();
             this.dataTab = new System.Windows.Forms.TabPage();
             this.usageReportDataGrid = new System.Windows.Forms.DataGridView();
+            this.dataTabBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.rawJsonTab = new System.Windows.Forms.TabPage();
             this.usageListJsonTx = new System.Windows.Forms.TextBox();
             this.combinedTab = new System.Windows.Forms.TabPage();
             this.reconciledDataGrid = new System.Windows.Forms.DataGridView();
+            this.combinedDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.availReportTree = new System.Windows.Forms.TreeView();
             this.label10 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
@@ -68,20 +70,18 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusBottomLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusBottomStatus1 = new System.Windows.Forms.ToolStripProgressBar();
-            this.dataTabBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.combinedDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.dataTabs.SuspendLayout();
             this.dataTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.usageReportDataGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataTabBindingSource)).BeginInit();
             this.rawJsonTab.SuspendLayout();
             this.combinedTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.reconciledDataGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.combinedDataBindingSource)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.statusStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataTabBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.combinedDataBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -200,9 +200,7 @@
             this.reconciledDataGrid.AllowUserToDeleteRows = false;
             this.reconciledDataGrid.AllowUserToOrderColumns = true;
             this.reconciledDataGrid.AllowUserToResizeRows = false;
-            this.reconciledDataGrid.AutoGenerateColumns = false;
             this.reconciledDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.reconciledDataGrid.DataSource = this.combinedDataBindingSource;
             this.reconciledDataGrid.Location = new System.Drawing.Point(4, 4);
             this.reconciledDataGrid.Name = "reconciledDataGrid";
             this.reconciledDataGrid.ReadOnly = true;
@@ -507,16 +505,16 @@
             this.dataTabs.ResumeLayout(false);
             this.dataTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.usageReportDataGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataTabBindingSource)).EndInit();
             this.rawJsonTab.ResumeLayout(false);
             this.rawJsonTab.PerformLayout();
             this.combinedTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.reconciledDataGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.combinedDataBindingSource)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataTabBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.combinedDataBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

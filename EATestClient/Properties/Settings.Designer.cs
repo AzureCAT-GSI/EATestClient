@@ -46,5 +46,65 @@ namespace EATestClient.Properties {
                 this["EnrollmentNumber"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SubscriptionId {
+            get {
+                return ((string)(this["SubscriptionId"]));
+            }
+            set {
+                this["SubscriptionId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string AADtenantId {
+            get {
+                return ((string)(this["AADtenantId"]));
+            }
+            set {
+                this["AADtenantId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string AADClientId {
+            get {
+                return ((string)(this["AADClientId"]));
+            }
+            set {
+                this["AADClientId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string AADClientSecret {
+            get {
+                return ((string)(this["AADClientSecret"]));
+            }
+            set {
+                this["AADClientSecret"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string AADAppId {
+            get {
+                return ((string)(this["AADAppId"]));
+            }
+            set {
+                this["AADAppId"] = value;
+            }
+        }
     }
 }
