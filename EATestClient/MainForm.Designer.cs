@@ -35,12 +35,10 @@
             this.dataTabs = new System.Windows.Forms.TabControl();
             this.dataTab = new System.Windows.Forms.TabPage();
             this.usageReportDataGrid = new System.Windows.Forms.DataGridView();
-            this.dataTabBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.rawJsonTab = new System.Windows.Forms.TabPage();
             this.usageListJsonTx = new System.Windows.Forms.TextBox();
             this.combinedTab = new System.Windows.Forms.TabPage();
             this.reconciledDataGrid = new System.Windows.Forms.DataGridView();
-            this.combinedDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.availReportTree = new System.Windows.Forms.TreeView();
             this.label10 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
@@ -67,6 +65,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.enrollmentMonthTx = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.dataTabBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.combinedDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusBottomLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusBottomStatus1 = new System.Windows.Forms.ToolStripProgressBar();
@@ -75,12 +75,12 @@
             this.dataTabs.SuspendLayout();
             this.dataTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.usageReportDataGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataTabBindingSource)).BeginInit();
             this.rawJsonTab.SuspendLayout();
             this.combinedTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.reconciledDataGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.combinedDataBindingSource)).BeginInit();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataTabBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.combinedDataBindingSource)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -126,10 +126,11 @@
             // 
             // dataTabs
             // 
+            this.dataTabs.CausesValidation = false;
             this.dataTabs.Controls.Add(this.dataTab);
             this.dataTabs.Controls.Add(this.rawJsonTab);
             this.dataTabs.Controls.Add(this.combinedTab);
-            this.dataTabs.Location = new System.Drawing.Point(289, 92);
+            this.dataTabs.Location = new System.Drawing.Point(292, 92);
             this.dataTabs.Name = "dataTabs";
             this.dataTabs.SelectedIndex = 0;
             this.dataTabs.Size = new System.Drawing.Size(768, 490);
@@ -151,15 +152,16 @@
             this.usageReportDataGrid.AllowUserToAddRows = false;
             this.usageReportDataGrid.AllowUserToDeleteRows = false;
             this.usageReportDataGrid.AllowUserToResizeRows = false;
-            this.usageReportDataGrid.AutoGenerateColumns = false;
+            this.usageReportDataGrid.CausesValidation = false;
             this.usageReportDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.usageReportDataGrid.DataSource = this.dataTabBindingSource;
             this.usageReportDataGrid.Location = new System.Drawing.Point(6, 6);
             this.usageReportDataGrid.MultiSelect = false;
             this.usageReportDataGrid.Name = "usageReportDataGrid";
             this.usageReportDataGrid.ReadOnly = true;
             this.usageReportDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.usageReportDataGrid.ShowCellErrors = false;
             this.usageReportDataGrid.ShowEditingIcon = false;
+            this.usageReportDataGrid.ShowRowErrors = false;
             this.usageReportDataGrid.Size = new System.Drawing.Size(748, 452);
             this.usageReportDataGrid.TabIndex = 0;
             // 
@@ -176,6 +178,7 @@
             // 
             // usageListJsonTx
             // 
+            this.usageListJsonTx.CausesValidation = false;
             this.usageListJsonTx.Location = new System.Drawing.Point(6, 6);
             this.usageListJsonTx.Multiline = true;
             this.usageListJsonTx.Name = "usageListJsonTx";
@@ -200,11 +203,15 @@
             this.reconciledDataGrid.AllowUserToDeleteRows = false;
             this.reconciledDataGrid.AllowUserToOrderColumns = true;
             this.reconciledDataGrid.AllowUserToResizeRows = false;
+            this.reconciledDataGrid.CausesValidation = false;
             this.reconciledDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.reconciledDataGrid.Location = new System.Drawing.Point(4, 4);
+            this.reconciledDataGrid.MultiSelect = false;
             this.reconciledDataGrid.Name = "reconciledDataGrid";
             this.reconciledDataGrid.ReadOnly = true;
+            this.reconciledDataGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.reconciledDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.reconciledDataGrid.ShowCellErrors = false;
             this.reconciledDataGrid.ShowEditingIcon = false;
             this.reconciledDataGrid.ShowRowErrors = false;
             this.reconciledDataGrid.Size = new System.Drawing.Size(753, 460);
@@ -213,8 +220,12 @@
             // 
             // availReportTree
             // 
+            this.availReportTree.CausesValidation = false;
+            this.availReportTree.HideSelection = false;
+            this.availReportTree.HotTracking = true;
             this.availReportTree.Location = new System.Drawing.Point(24, 92);
             this.availReportTree.Name = "availReportTree";
+            this.availReportTree.ShowNodeToolTips = true;
             this.availReportTree.Size = new System.Drawing.Size(242, 480);
             this.availReportTree.TabIndex = 15;
             this.availReportTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.availReportTree_NodeMouseClick);
@@ -498,6 +509,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tabControl1);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EA Usage and pricing viewer";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -505,14 +517,14 @@
             this.dataTabs.ResumeLayout(false);
             this.dataTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.usageReportDataGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataTabBindingSource)).EndInit();
             this.rawJsonTab.ResumeLayout(false);
             this.rawJsonTab.PerformLayout();
             this.combinedTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.reconciledDataGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.combinedDataBindingSource)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataTabBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.combinedDataBindingSource)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);

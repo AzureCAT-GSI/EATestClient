@@ -73,6 +73,7 @@ namespace EATestClient
 
         private void initSettings()
         {
+            updateStatus("Initializing settings ...", true);
             Settings curSettings = Settings.Default;
             string jwt = curSettings["AccessKey"]?.ToString();
             if (!string.IsNullOrEmpty(jwt))
@@ -93,14 +94,35 @@ namespace EATestClient
             aadClientId = curSettings["AADClientId"]?.ToString();
             aadClientSecret = curSettings["AADClientSecret"]?.ToString();
             aadAppId = curSettings["AADAppId"]?.ToString();
+            updateStatus("Settings initialized ...");
+        }
+
+        private void updateStatus(string statusMsg)
+        {
+            updateStatus(statusMsg, false);
+        }
+        private void updateStatus(string statusMsg, bool showProgress)
+        {
+            if (showProgress)
+            {
+                statusBottomStatus1.Style = ProgressBarStyle.Marquee;
+                statusBottomStatus1.MarqueeAnimationSpeed = 30;
+            }
+            else
+            {
+                statusBottomStatus1.Style = ProgressBarStyle.Continuous;
+                statusBottomStatus1.MarqueeAnimationSpeed = 0;
+            }
+            statusBottomLabel1.Text = statusMsg;
         }
 
         private async void getReportDataBtn_Click(object sender, EventArgs e)
         {
             ValidateInputForUsageList();
 
-            using (var wcur = new WaitCursor())
+            using (new WaitCursor())
             {
+                updateStatus("Fetching usage report list ...", true);
                 string availReportsJson = await GetEnrollmentUsageList(enrollmentTx.Text, accessKeyTx.Text);
                 usageListJsonTx.Text = availReportsJson;
 
@@ -115,6 +137,7 @@ namespace EATestClient
                 {
                     MessageBox.Show($"An error occured getting report data::{ex.ToString()}");
                 }
+                updateStatus("Report list populated");
             }
         }
 
@@ -475,11 +498,13 @@ namespace EATestClient
                 //Clear the old data
                 reconciledDataGrid.DataSource = null;
 
+                updateStatus("Fetching usage data ...", true);
                 //Get the detail JSON
                 string usageDataJson = await GetEnrollmentUsageByMonth(currentReportDate, UsageReportType.Detail, currentEnrollment, currentToken.Token, "json");
                 List<EAUsageDetailItem> detailItems = JsonConvert.DeserializeObject<List<EAUsageDetailItem>>(usageDataJson);
 
                 //Get the Pricing JSON
+                updateStatus("Fetching price sheet ...", true);
                 string pricingDataJson = await GetEnrollmentUsageByMonth(currentReportDate, UsageReportType.PriceSheet, currentEnrollment, currentToken.Token, "json");
                 List<EAPriceSheetItem> priceListItems = JsonConvert.DeserializeObject<List<EAPriceSheetItem>>(pricingDataJson);
 
@@ -491,6 +516,7 @@ namespace EATestClient
                 //List<AzureRateCard> azurePrices = JsonConvert.DeserializeObject<List<AzureRateCard>>(azurePricingJson);
 
 
+                updateStatus("Data recieved, combining datasets ...", true);
                 List<EAPriceToActualReconcileVMItem> reconciledData = null;
                 reconciledDataGrid.DataSource = null;
                 if (currentReportDate.Year < 2016 && currentReportDate.Month < 12)
@@ -502,11 +528,13 @@ namespace EATestClient
                     reconciledData = combineUsageAndPricing(detailItems, priceListItems);
                 }
 
+                updateStatus("Binding to views ...");
                 currentDataLabel.Text = $"Reconciling {currentReportDate.ToString("MMMM")}-{currentReportDate.Year}";
-                //dataTabBindingSource.DataSource = reconciledData;
+                dataTabs.SelectedTab = dataTabs.TabPages["combinedTab"];
                 reconciledDataGrid.DataSource = reconciledData;
                 reconciledDataGrid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
-                dataTabs.SelectedTab = dataTabs.TabPages["combinedTab"];
+                updateStatus("Ready");
+
             }
         }
 
@@ -651,7 +679,7 @@ namespace EATestClient
                 string urlToFetch = UrlToReport;
                 DateTime currentReportDate = DateTime.Parse(reportDate);
                 UsageReportType curType = (UsageReportType)Enum.Parse(typeof(UsageReportType), reportType);
-
+                updateStatus("Fetching data ...", true);
                 string usageDataJson = await GetEnrollmentUsageByMonth(currentReportDate, curType, currentEnrollment, currentToken.Token, "json");
                 usageReportDataGrid.DataSource = null;
                 usageReportDataGrid.AutoGenerateColumns = true;
@@ -695,7 +723,7 @@ namespace EATestClient
                             {
                                 dataTabBindingSource.DataSource = JsonConvert.DeserializeObject<List<EAUsageSummaryItem>>(usageDataJson);
                             }
-                            catch(Exception ex)
+                            catch (Exception ex)
                             {
                                 MessageBox.Show(ex.ToString());
                             }
@@ -726,12 +754,13 @@ namespace EATestClient
                             }
                             break;
                         }
-
                 }
 
+                updateStatus("Data recieved, binding to views ...", true);
+                dataTabs.SelectedTab = dataTabs.TabPages["dataTab"];
                 usageReportDataGrid.DataSource = dataTabBindingSource;
                 usageReportDataGrid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
-                dataTabs.SelectedTab = dataTabs.TabPages["detailTab"];
+                updateStatus("Ready", false);
             }
         }
 
