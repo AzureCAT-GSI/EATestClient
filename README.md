@@ -1,3 +1,4 @@
+
 # EATestClient
 Contains an test client you can use against the EA tenant APIs to view the pricing and usage
 
@@ -19,11 +20,18 @@ To set it up, you will need an API key generated from the EA portal. It currentl
 > Note: the price sheet schema changed fields in November-December 2015.
 > 
 > From (November 2015):
-> * public string ConsumptionPartNumber { get; set; }
-> * public double? ConsumptionPrice { get; set; }
+> ```csharp
+> public string ConsumptionPartNumber { get; set; }
+> public double? ConsumptionPrice { get; set; }
+> ```
 > 
 > TO (December 2015):
-> * public string PartNumber { get; set; }
-> * public Double? UnitPrice { get; set; }
+> ```csharp
+> public string PartNumber { get; set; }
+> public Double? UnitPrice { get; set; }
+> ```
 > 
 > Both of these fields are included in the sample test client for reference and it will be empty when not used.
+
+------
+Copyright 2016 Microsoft Corporation. All rights reserved. Except where otherwise noted, these materials are licensed under the terms of the MIT License. You may use them according to the license as is most appropriate for your project. The terms of this license can be found at https://opensource.org/licenses/MIT.
