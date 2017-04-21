@@ -1,15 +1,14 @@
-
 # EATestClient
-Contains an test client you can use against the EA tenant APIs to view the pricing and usage
+Contains a test client you can use against the EA tenant APIs to view the pricing and usage. This test client uses the Microsoft Azure EA Portal APIs to gather usage and pricing data from the API. With the API Key, and the enrollment Id, you can view the following:
 
-This test client uses the Microsoft Azure EA Portal APIs to gather usage and pricing data from the API. With the API Key, and the enrollment Id, you can view the following:
 1) Get a list of reports that are available for the enrollment (https://ea.azure.com/rest/100/usage-reports)
 1) Get the summary (https://ea.azure.com/rest/100/usage-report?month=2017-04&type=Summary&fmt=json) You can change this to CSV
 1) Get the detailed usage (https://ea.azure.com/rest/100/usage-report?month=2017-04&type=Detail&fmt=json)
 1) Get the price list that was in effect for the particular month (https://ea.azure.com/rest/100/usage-report?month=2017-04&type=PriceSheet&fmt=json)
 1) (If there is usage) Get the marketplace usage for the month (https://ea.azure.com/rest/100/usage-report?month=2015-07&type=StoreCharge&fmt=json)
 
-To set it up, you will need an API key generated from the EA portal. It currently defaults to a test tenant and a test enrollment. To use the client:
+To set it up, you will need an API key generated from the EA portal. It currently defaults to a test tenant and a test enrollment.
+To use the client:
 1) Generate an access key from the EA Portal
 1) Download/Clone the test client from https://github.com/AzureCAT-GSI/EATestClient 
 1) Open the SLN file from Visual Studio 2015 or above and compile the EXE
