@@ -25,18 +25,6 @@ namespace EATestClient.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IlE5WVpaUnA1UVRpMGVPMmNoV19aYmh1QlBpWSJ9.eyJFbnJvbGxtZW50TnVtYmVyIjoiMTAwIiwiSWQiOiIxY2Q4Mzg5YS01Mzc4LTQzZGQtYjUxOC0xNDM3MDkwYjA4MmEiLCJSZXBvcnRWaWV3IjoiU3lzdGVtIiwiUGFydG5lcklkIjoiIiwiRGVwYXJ0bWVudElkIjoiIiwiQWNjb3VudElkIjoiIiwiaXNzIjoiZWEubWljcm9zb2Z0YXp1cmUuY29tIiwiYXVkIjoiY2xpZW50LmVhLm1pY3Jvc29mdGF6dXJlLmNvbSIsImV4cCI6MTQ5MTk1MTE2MywibmJmIjoxNDc2MjI2MzYzfQ.EjDkRGFhWt9BVL0Vpl8OG2t2aJ6V-J78s8FdWkju2eq-YGf6QNINS_1jXQHkEV7O5uhcnzGXfHziiXPPPF2gdSooCwN8TjXmtQBJWMVX2wD6nnL6kQ0J7mx7k-A2DHd1Ds9AePS7174GYIIqC-uP94h2c_a96mwGdfganlXQHDTA0MCB2KHF0ZgLnoNB-enAbX6VnJAuOLLQSatm4M0VPdbifvqquNggkQb9g1BoGwfPjzpSjo7bdsC1a3b-4ajXzQnFFXdlArhorTrypImJle4nnR7yraO4PV-eyDMibpTSLDc6RvcjR7IjNyEun-YXCtyJawrEeFmluS-pkHqI0w")]
-        public string AccessKey {
-            get {
-                return ((string)(this["AccessKey"]));
-            }
-            set {
-                this["AccessKey"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("100")]
         public string EnrollmentNumber {
             get {
@@ -62,12 +50,12 @@ namespace EATestClient.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string AADtenantId {
+        public string AADTenantId {
             get {
-                return ((string)(this["AADtenantId"]));
+                return ((string)(this["AADTenantId"]));
             }
             set {
-                this["AADtenantId"] = value;
+                this["AADTenantId"] = value;
             }
         }
         
@@ -95,15 +83,118 @@ namespace EATestClient.Properties {
             }
         }
         
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://azure.microsoft.com/en-us/support/legal/offer-details/")]
+        public string AzureOfferDetailsUrl {
+            get {
+                return ((string)(this["AzureOfferDetailsUrl"]));
+            }
+        }
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string AADAppId {
+        public string AccessKeyBilling {
             get {
-                return ((string)(this["AADAppId"]));
+                return ((string)(this["AccessKeyBilling"]));
             }
             set {
-                this["AADAppId"] = value;
+                this["AccessKeyBilling"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("USD")]
+        public string DefaultCurrency {
+            get {
+                return ((string)(this["DefaultCurrency"]));
+            }
+            set {
+                this["DefaultCurrency"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("en-US")]
+        public string DefaultLocale {
+            get {
+                return ((string)(this["DefaultLocale"]));
+            }
+            set {
+                this["DefaultLocale"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("US")]
+        public string DefaultRegion {
+            get {
+                return ((string)(this["DefaultRegion"]));
+            }
+            set {
+                this["DefaultRegion"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string UsageReportListAPIUrl {
+            get {
+                return ((string)(this["UsageReportListAPIUrl"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2015-06-01-preview")]
+        public string AzureBillingVersion {
+            get {
+                return ((string)(this["AzureBillingVersion"]));
+            }
+            set {
+                this["AzureBillingVersion"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IlE5WVpaUnA1UVRpMGVPMmNoV19aYmh1QlBpWSJ9.eyJFbnJvbGxtZW50TnVtYmVyIjoiMTAwIiwiSWQiOiJiNWU2OWI2Mi0wOWM2LTRmMjktODdmYi0yMTNmMjVkOGExNTMiLCJSZXBvcnRWaWV3IjoiU3lzdGVtIiwiUGFydG5lcklkIjoiIiwiRGVwYXJ0bWVudElkIjoiIiwiQWNjb3VudElkIjoiIiwiaXNzIjoiZWEubWljcm9zb2Z0YXp1cmUuY29tIiwiYXVkIjoiY2xpZW50LmVhLm1pY3Jvc29mdGF6dXJlLmNvbSIsImV4cCI6MTUwNzgyOTI0OCwibmJmIjoxNDkyMDE4MDQ4fQ.Nng57KGNINNTuf8lZB0u4FjM16tu-mrrzWtNQ6vG4_jIJ_Ad06O0U8ROIdM88rvQMyuUlKU3RE-titGq7QoV0ieioKXFrOJ4HTjeUmYET2loriz8UXozk_e2QTmi_FOn-sDgwMhGMRhg0w85cw1p7m2o_2dBizcEhrus8SNb-Z6Ab4A08g9_V2IS1oNJRnU4lGP91sK2CTpWGJUocsTucqTfrUknWPD1ghDSAqkWfGcTvPFQlg7RwXQpG79PfBf0R4ptETBDBfWO7iFNnhphWrKLSCCQ53oLaffvUmlM5YVqeMUH3W63uNMVMIvi9GMA2NFbZcBH3azooSVZpSNDHw")]
+        public string AccessKeyUsage {
+            get {
+                return ((string)(this["AccessKeyUsage"]));
+            }
+            set {
+                this["AccessKeyUsage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IlE5WVpaUnA1UVRpMGVPMmNoV19aYmh1QlBpWSJ9.eyJFbnJvbGxtZW50TnVtYmVyIjoiMTAwIiwiSWQiOiJiNWU2OWI2Mi0wOWM2LTRmMjktODdmYi0yMTNmMjVkOGExNTMiLCJSZXBvcnRWaWV3IjoiU3lzdGVtIiwiUGFydG5lcklkIjoiIiwiRGVwYXJ0bWVudElkIjoiIiwiQWNjb3VudElkIjoiIiwiaXNzIjoiZWEubWljcm9zb2Z0YXp1cmUuY29tIiwiYXVkIjoiY2xpZW50LmVhLm1pY3Jvc29mdGF6dXJlLmNvbSIsImV4cCI6MTUwNzgyOTI0OCwibmJmIjoxNDkyMDE4MDQ4fQ.Nng57KGNINNTuf8lZB0u4FjM16tu-mrrzWtNQ6vG4_jIJ_Ad06O0U8ROIdM88rvQMyuUlKU3RE-titGq7QoV0ieioKXFrOJ4HTjeUmYET2loriz8UXozk_e2QTmi_FOn-sDgwMhGMRhg0w85cw1p7m2o_2dBizcEhrus8SNb-Z6Ab4A08g9_V2IS1oNJRnU4lGP91sK2CTpWGJUocsTucqTfrUknWPD1ghDSAqkWfGcTvPFQlg7RwXQpG79PfBf0R4ptETBDBfWO7iFNnhphWrKLSCCQ53oLaffvUmlM5YVqeMUH3W63uNMVMIvi9GMA2NFbZcBH3azooSVZpSNDHw")]
+        public string AccessKeyPricing {
+            get {
+                return ((string)(this["AccessKeyPricing"]));
+            }
+            set {
+                this["AccessKeyPricing"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://automaticbillingspec.blob.core.windows.net/spec/TestEnrollmentUsageApiKey" +
+            ".txt")]
+        public string TestEnrollmentKeyUrl {
+            get {
+                return ((string)(this["TestEnrollmentKeyUrl"]));
+            }
+            set {
+                this["TestEnrollmentKeyUrl"] = value;
             }
         }
     }

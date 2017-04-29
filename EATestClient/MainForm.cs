@@ -24,28 +24,23 @@ namespace EATestClient
     {
         string downloadUsageByMonthUrlTemplate = string.Format(@"{0}?month={{1}}&type={{2}}&fmt={{3}}", ConfigurationManager.AppSettings["UsageReportAPIUrl"]);
         string getUsageListUrlTemplate = ConfigurationManager.AppSettings["UsageReportListAPIUrl"];
+        string getAzureOfferDetailsUrl = ConfigurationManager.AppSettings["AzureOfferDetailsUrl"];
         static HttpClient client = new HttpClient();
         EAAvailableUsageReports availableMonths = new EAAvailableUsageReports();
-        string currentEnrollment = string.Empty;
         BearerToken currentToken = null;
         byte[] reportBytes;
-        string subscriptionId = "";
-        string aadTenantId = "";
-        string aadClientId = "";
-        string aadClientSecret = "";
-        string aadAppId = "";
-
+        RuntimeConfig currentConfig = new RuntimeConfig();
 
         public MainForm()
         {
             InitializeComponent();
-            initSettings();
-            initValidators();
         }
+
+        
 
         private void initValidators()
         {
-            accessKeyTx.Validating += AccessKeyTx_Validating;
+            accessKeyPriceTxt.Validating += AccessKeyTx_Validating;
             enrollmentMonthTx.Validating += EnrollmentMonthTx_Validating;
         }
 
@@ -62,11 +57,11 @@ namespace EATestClient
 
         private void AccessKeyTx_Validating(object sender, CancelEventArgs e)
         {
-            accessKeyTx.ForeColor = Color.White;
-            if (string.IsNullOrEmpty(accessKeyTx.Text))
+            accessKeyPriceTxt.ForeColor = Color.White;
+            if (string.IsNullOrEmpty(accessKeyPriceTxt.Text))
             {
-                accessKeyTx.ForeColor = Color.Yellow;
-                accessKeyTx.Focus();
+                accessKeyPriceTxt.ForeColor = Color.Yellow;
+                accessKeyPriceTxt.Focus();
                 e.Cancel = true;
             }
         }
@@ -74,27 +69,60 @@ namespace EATestClient
         private void initSettings()
         {
             updateStatus("Initializing settings ...", true);
-            Settings curSettings = Settings.Default;
-            string jwt = curSettings["AccessKey"]?.ToString();
-            if (!string.IsNullOrEmpty(jwt))
+            Settings curAppSettings = Settings.Default;
+            
+            //eaTestKeyLnk.Links.Add(new LinkLabel.Link() { LinkData = curAppSettings.TestEnrollmentKeyUrl });
+
+
+            string ujwt = curAppSettings["AccessKeyUsage"]?.ToString();
+            if (!string.IsNullOrEmpty(ujwt))
             {
-                currentToken = BearerToken.FromJwt(jwt);
-                accessKeyTx.Text = currentToken.Token;
-                accessKeyMonthTx.Text = currentToken.Token;
+                currentToken = BearerToken.FromJwt(ujwt);
+                accessKeyUsageTxt.Text = currentToken.Token;
+                currentConfig.UsageAccessKey = currentToken.Token;
             }
 
-            currentEnrollment = curSettings["EnrollmentNumber"]?.ToString();
-            if (!string.IsNullOrEmpty(currentEnrollment))
+            string pjwt = curAppSettings["AccessKeyPricing"]?.ToString();
+            if (!string.IsNullOrEmpty(pjwt))
             {
-                enrollmentTx.Text = currentEnrollment;
+                currentToken = BearerToken.FromJwt(pjwt);
+                accessKeyPriceTxt.Text = currentToken.Token;
+                currentConfig.PricingAccessKey = currentToken.Token;
+            }
+            else
+            {
+                currentConfig.PricingAccessKey = currentConfig.UsageAccessKey;
             }
 
-            subscriptionId = curSettings["SubscriptionId"]?.ToString();
-            aadTenantId = curSettings["AADtenantId"]?.ToString();
-            aadClientId = curSettings["AADClientId"]?.ToString();
-            aadClientSecret = curSettings["AADClientSecret"]?.ToString();
-            aadAppId = curSettings["AADAppId"]?.ToString();
+            currentConfig.EnrollmentNumber = curAppSettings["EnrollmentNumber"]?.ToString();
+            if (!string.IsNullOrEmpty(currentConfig.EnrollmentNumber))
+            {
+                enrollmentTx.Text = currentConfig.EnrollmentNumber;
+            }
+
+            currentConfig.SubscriptionId = curAppSettings["SubscriptionId"]?.ToString();
+            azureSubscriptionIdTxt.Text = currentConfig.SubscriptionId;
+
+            currentConfig.TenantId = curAppSettings["AADtenantId"]?.ToString();
+            aadTenantIdTxt.Text = currentConfig.TenantId;
+
+            currentConfig.ClientId = curAppSettings["AADClientId"]?.ToString();
+            azureClientIdTxt.Text = currentConfig.ClientId;
+
+            currentConfig.SharedSecret = curAppSettings["AADClientSecret"]?.ToString();
+            azureSharedSecretTxt.Text = currentConfig.SharedSecret;
+
+            bindOfferCodes();
             updateStatus("Settings initialized ...");
+        }
+
+        private void bindOfferCodes()
+        {
+            List<AzureOfferCode> offerCodes = Utils.GetOfferCodes();
+            offerCodeLst.DataSource = offerCodes;
+            offerCodeLst.DisplayMember = "OfferName";
+            offerCodeLst.ValueMember = "OfferNumber";
+            offerCodeLst.SelectedIndex = 0;
         }
 
         private void updateStatus(string statusMsg)
@@ -123,7 +151,7 @@ namespace EATestClient
             using (new WaitCursor())
             {
                 updateStatus("Fetching usage report list ...", true);
-                string availReportsJson = await GetEnrollmentUsageList(enrollmentTx.Text, accessKeyTx.Text);
+                string availReportsJson = await GetEnrollmentUsageList(enrollmentTx.Text, accessKeyPriceTxt.Text);
                 usageListJsonTx.Text = availReportsJson;
 
                 try
@@ -200,7 +228,7 @@ namespace EATestClient
             {
                 ValidateInputForUsageMonth();
                 UsageReportType type = (UsageReportType)reportTypeCB.SelectedIndex;
-                string json = GetEnrollmentUsageByMonth(monthCalendar.SelectionEnd, type, enrollmentMonthTx.Text, accessKeyMonthTx.Text, formatCB.Text).Result;
+                string json = GetEnrollmentUsageByMonth(monthCalendar.SelectionEnd, type, enrollmentMonthTx.Text, accessKeyUsageTxt.Text, formatCB.Text).Result;
                 reportBytes = Encoding.Default.GetBytes(json);
                 jsonMonthTx.Text = json;
             }
@@ -212,7 +240,7 @@ namespace EATestClient
             {
                 ValidateInputForUsageMonth();
                 UsageReportType type = (UsageReportType)reportTypeCB.SelectedIndex;
-                string json = GetEnrollmentUsageByMonthStream(monthCalendar.SelectionEnd, type, enrollmentMonthTx.Text, accessKeyMonthTx.Text, formatCB.Text).Result;
+                string json = GetEnrollmentUsageByMonthStream(monthCalendar.SelectionEnd, type, enrollmentMonthTx.Text, accessKeyUsageTxt.Text, formatCB.Text).Result;
                 reportBytes = Encoding.Default.GetBytes(json);
                 jsonMonthTx.Text = json;
             }
@@ -500,20 +528,20 @@ namespace EATestClient
 
                 updateStatus("Fetching usage data ...", true);
                 //Get the detail JSON
-                string usageDataJson = await GetEnrollmentUsageByMonth(currentReportDate, UsageReportType.Detail, currentEnrollment, currentToken.Token, "json");
+                string usageDataJson = await GetEnrollmentUsageByMonth(currentReportDate, UsageReportType.Detail, currentConfig.EnrollmentNumber, currentToken.Token, "json");
                 List<EAUsageDetailItem> detailItems = JsonConvert.DeserializeObject<List<EAUsageDetailItem>>(usageDataJson);
 
                 //Get the Pricing JSON
                 updateStatus("Fetching price sheet ...", true);
-                string pricingDataJson = await GetEnrollmentUsageByMonth(currentReportDate, UsageReportType.PriceSheet, currentEnrollment, currentToken.Token, "json");
+                string pricingDataJson = await GetEnrollmentUsageByMonth(currentReportDate, UsageReportType.PriceSheet, currentConfig.EnrollmentNumber, currentToken.Token, "json");
                 List<EAPriceSheetItem> priceListItems = JsonConvert.DeserializeObject<List<EAPriceSheetItem>>(pricingDataJson);
 
                 //TODO
                 //Get Azure Prices
-                //BearerToken bears = Utils.GetAccessTokenFromAAD(aadTenantId, aadClientId, aadClientSecret, aadAppId).Result;
+                BearerToken bears = Utils.GetAccessTokenFromAAD(currentConfig.TenantId, currentConfig.ClientId, currentConfig.SharedSecret, currentConfig.TenantId ).Result;
 
-                //string azurePricingJson = await GetAzureRateCard(bears, subscriptionId, Utils.GetOfferCodes()[0], "USD", "en-US", "US");
-                //List<AzureRateCard> azurePrices = JsonConvert.DeserializeObject<List<AzureRateCard>>(azurePricingJson);
+                string azurePricingJson = await GetAzureRateCard(bears, currentConfig.SubscriptionId, currentConfig.AzureOfferCode, currentConfig.Currency, currentConfig.Locale, currentConfig.Region);
+                List<AzureRateCard> azurePrices = JsonConvert.DeserializeObject<List<AzureRateCard>>(azurePricingJson);
 
 
                 updateStatus("Data recieved, combining datasets ...", true);
@@ -538,10 +566,10 @@ namespace EATestClient
             }
         }
 
-        private async Task<string> GetAzureRateCard(BearerToken bears, string subscriptionId, AzureOfferCode azureOfferCode, string currency, string locale, string region)
+        private async Task<string> GetAzureRateCard(BearerToken bears, string subscriptionId, string offerCode, string currency, string locale, string region)
         {
             string rateCardApiVersion = "2015-06-01-preview";
-            string rateCardUrl = $@"https://management.azure.com//subscriptions//{subscriptionId}//providers//Microsoft.Commerce//RateCard?api-version={rateCardApiVersion}&$filter=OfferDurableId eq '{azureOfferCode.OfferName}' and Currency eq '{currency}' and Locale eq '{locale}' and RegionInfo eq '{region}'";
+            string rateCardUrl = $@"https://management.azure.com//subscriptions//{subscriptionId}//providers//Microsoft.Commerce//RateCard?api-version={rateCardApiVersion}&$filter=OfferDurableId eq '{offerCode}' and Currency eq '{currency}' and Locale eq '{locale}' and RegionInfo eq '{region}'";
 
             HttpResponseMessage response = null;
             string responseMsg = string.Empty;
@@ -680,7 +708,7 @@ namespace EATestClient
                 DateTime currentReportDate = DateTime.Parse(reportDate);
                 UsageReportType curType = (UsageReportType)Enum.Parse(typeof(UsageReportType), reportType);
                 updateStatus("Fetching data ...", true);
-                string usageDataJson = await GetEnrollmentUsageByMonth(currentReportDate, curType, currentEnrollment, currentToken.Token, "json");
+                string usageDataJson = await GetEnrollmentUsageByMonth(currentReportDate, curType, currentConfig.EnrollmentNumber, currentToken.Token, "json");
                 usageReportDataGrid.DataSource = null;
                 usageReportDataGrid.AutoGenerateColumns = true;
                 usageListJsonTx.Text = usageDataJson;
@@ -777,6 +805,91 @@ namespace EATestClient
 
                 }
             }
+        }
+
+        private async void getPublicPricingBtn_Click(object sender, EventArgs e)
+        {
+            if (!validateRuntimeSettings()) { return; }
+
+            using (new WaitCursor())
+            {
+                updateStatus("Fetching data ...", true);
+                BearerToken bears = Utils.GetAccessTokenFromAAD(currentConfig.TenantId, currentConfig.ClientId, currentConfig.SharedSecret, currentConfig.ResourceUri).Result;
+                string azPricingDataJson = await GetAzureRateCard(bears, currentConfig.SubscriptionId, ((AzureOfferCode)offerCodeLst.SelectedItem).OfferNumber, currencyLst.SelectedItem.ToString(), localeLst.SelectedItem.ToString(), regionLst.SelectedItem.ToString());
+                List<AzureRateCard> azurePrices = JsonConvert.DeserializeObject<List<AzureRateCard>>(azPricingDataJson);
+
+                usageReportDataGrid.DataSource = null;
+                usageReportDataGrid.AutoGenerateColumns = true;
+                usageListJsonTx.Text = azPricingDataJson;
+                //currentDataLabel.Text = $"{reportType} {currentReportDate.ToString("MMMM")}-{currentReportDate.Year}";
+
+                try
+                {
+                    dataTabBindingSource.DataSource = JsonConvert.DeserializeObject<List<EAPriceSheetItem>>(azPricingDataJson);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+
+                updateStatus("Data recieved, binding to views ...", true);
+                dataTabs.SelectedTab = dataTabs.TabPages["publicPricingTab"];
+                publicPricingDataGrid.DataSource = dataTabBindingSource;
+                publicPricingDataGrid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+                updateStatus("Ready", false);
+
+            }
+        }
+
+        private bool validateRuntimeSettings()
+        {
+            bool isValid = false;
+           if (!string.IsNullOrEmpty(currentConfig.AzureOfferCode))
+            {
+                isValid = true;
+            }
+
+            return isValid;
+        }
+
+        private void eaTestKeyLnk_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start(e.Link.LinkData as string);
+        }
+
+        private void savConifigBtn_Click(object sender, EventArgs e)
+        {
+            //Update the currrent config and save
+            Settings appSettings = Settings.Default;
+            appSettings.AADClientId = azureClientIdTxt.Text;
+
+            appSettings.AADClientSecret = azureSharedSecretTxt.Text;
+
+            appSettings.AADTenantId = aadTenantIdTxt.Text;
+
+            appSettings.AccessKeyBilling = accessKeyPriceTxt.Text;
+
+            appSettings.AccessKeyUsage = accessKeyUsageTxt.Text;
+
+            appSettings.DefaultCurrency = currencyLst.SelectedValue?.ToString();
+
+            appSettings.DefaultLocale = localeLst.SelectedValue?.ToString();
+
+            appSettings.DefaultRegion = regionLst.SelectedValue?.ToString();
+
+            appSettings.EnrollmentNumber = enrollmentTx.Text;
+
+            appSettings.SubscriptionId = azureSubscriptionIdTxt.Text;
+
+            appSettings.Save();
+
+            initSettings();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            initSettings();
+            initValidators();
         }
     }
 }

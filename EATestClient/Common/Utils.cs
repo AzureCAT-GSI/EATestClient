@@ -96,11 +96,11 @@ namespace EATestClient.Common
                         newToken = JsonConvert.DeserializeObject<BearerToken>(responseMsg);
                     }
                 }
-                catch (HttpRequestException ex)
+                catch (HttpRequestException)
                 {
                     response.StatusCode = HttpStatusCode.BadRequest;
                 }
-                catch (Exception ex2)
+                catch (Exception)
                 {
                     response.StatusCode = HttpStatusCode.Unauthorized;
                 }
@@ -108,5 +108,50 @@ namespace EATestClient.Common
 
             return newToken;
         }
+
+        /// <summary>
+
+        /// creates a csv file from the usage data
+
+        /// </summary>
+
+        /// <param name="data">data from the usage api</param>
+
+        /// <returns>csv file as string</returns>
+
+        public static string CreateCsv(string data)
+
+        {
+            StringBuilder sb = new StringBuilder();
+
+            string[] columns = new string[]
+            {
+
+                "id", "name", "type",
+                "properties/subscriptionId", "properties/usageStartTime", "properties/usageEndTime",
+                "properties/meterName", "properties/meterCategory", "properties/unit",
+                "properties/instanceData", "properties/meterId", "properties/MeterRegion",
+                "properties/quantity", "properties/infoFields"
+            };
+
+            string header = string.Join(";", columns);
+            sb.AppendLine(header);
+
+            //data.Value.ForEach(x =>
+            //{
+            //    string[] values = new string[]
+            //    {
+            //        x.Id, x.Name, x.Type,
+            //        x.Properties.SubscriptionId, x.Properties.UsageStartTime, x.Properties.UsageEndTime,
+            //        x.Properties.MeterName, x.Properties.MeterCategory,x.Properties.Unit,
+            //        x.Properties.InstanceDataRaw, x.Properties.MeterId, x.Properties.MeterRegion,
+            //        x.Properties.Quantity.ToString(), JsonConvert.SerializeObject(x.Properties.InfoFields)
+            //    };
+
+            //    sb.AppendLine(string.Join(";", values));
+            //});
+            return sb.ToString();
+        }
     }
+
 }

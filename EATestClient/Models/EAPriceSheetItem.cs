@@ -8,6 +8,8 @@ namespace EATestClient.Models
 {
     public class EAPriceSheetItem
     {
+        private string unitOfMeasure;
+
         public EAPriceSheetItem()
         {
 
@@ -34,7 +36,16 @@ namespace EATestClient.Models
         /// Compute Hours Virtual Machines and Cloud Services Compute measure hours of use
         /// Database Days SQL Server measures instances in database days
         /// </summary>
-        public string UnitOfMeasure { get; set; }
+        public string UnitOfMeasure {
+            get
+            {
+                return unitOfMeasure;
+            }
+            set
+            {
+                unitOfMeasure = value;
+            }
+        }
         /// <summary>
         /// The parsed unit of measure as a decimal. Returns just the raw number
         /// </summary>

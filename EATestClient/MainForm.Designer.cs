@@ -29,92 +29,151 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.mainTabs = new System.Windows.Forms.TabControl();
+            this.usageListTab = new System.Windows.Forms.TabPage();
+            this.exportTypeList = new System.Windows.Forms.ComboBox();
+            this.exportFormatLbl = new System.Windows.Forms.Label();
+            this.exportView = new System.Windows.Forms.Button();
             this.currentDataLabel = new System.Windows.Forms.Label();
             this.dataTabs = new System.Windows.Forms.TabControl();
             this.dataTab = new System.Windows.Forms.TabPage();
             this.usageReportDataGrid = new System.Windows.Forms.DataGridView();
-            this.rawJsonTab = new System.Windows.Forms.TabPage();
-            this.usageListJsonTx = new System.Windows.Forms.TextBox();
+            this.publicPricingTab = new System.Windows.Forms.TabPage();
+            this.getPublicPricingBtn = new System.Windows.Forms.Button();
+            this.regionLst = new System.Windows.Forms.ComboBox();
+            this.regionLbl = new System.Windows.Forms.Label();
+            this.localeLst = new System.Windows.Forms.ComboBox();
+            this.localeLbl = new System.Windows.Forms.Label();
+            this.currencyLbl = new System.Windows.Forms.Label();
+            this.offerDetailsLnk = new System.Windows.Forms.LinkLabel();
+            this.currencyLst = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.offerCodeLst = new System.Windows.Forms.ComboBox();
+            this.publicPricingDataGrid = new System.Windows.Forms.DataGridView();
             this.combinedTab = new System.Windows.Forms.TabPage();
             this.reconciledDataGrid = new System.Windows.Forms.DataGridView();
+            this.rawJsonTab = new System.Windows.Forms.TabPage();
+            this.usageListJsonTx = new System.Windows.Forms.TextBox();
             this.availReportTree = new System.Windows.Forms.TreeView();
-            this.label10 = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.availUsageReportLbl = new System.Windows.Forms.Label();
+            this.dataDislayDateLbl = new System.Windows.Forms.Label();
             this.getReportDataBtn = new System.Windows.Forms.Button();
-            this.accessKeyTx = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.enrollmentTx = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.usageByMonthTab = new System.Windows.Forms.TabPage();
             this.formatCB = new System.Windows.Forms.ComboBox();
             this.lblFormat = new System.Windows.Forms.Label();
             this.btnSaveReport = new System.Windows.Forms.Button();
             this.reportTypeCB = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
+            this.reportTypeLbl = new System.Windows.Forms.Label();
             this.monthCalendar = new System.Windows.Forms.MonthCalendar();
             this.label7 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.jsonResponseLbl = new System.Windows.Forms.Label();
             this.jsonMonthTx = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.streamDownloadBtn = new System.Windows.Forms.Button();
             this.btnSendRequest = new System.Windows.Forms.Button();
-            this.accessKeyMonthTx = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.enrollmentMonthTx = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.configTab = new System.Windows.Forms.TabPage();
+            this.accessKeysGroup = new System.Windows.Forms.GroupBox();
+            this.savConifigBtn = new System.Windows.Forms.Button();
+            this.azureSharedSecretTxt = new System.Windows.Forms.TextBox();
+            this.azureSharedSecretLbl = new System.Windows.Forms.Label();
+            this.azureSubscriptionIdTxt = new System.Windows.Forms.TextBox();
+            this.azureSubscriptionIdLbl = new System.Windows.Forms.Label();
+            this.aadTenantIdTxt = new System.Windows.Forms.TextBox();
+            this.aadTenantIdLbl = new System.Windows.Forms.Label();
+            this.azureClientIdTxt = new System.Windows.Forms.TextBox();
+            this.azureClientIdLbl = new System.Windows.Forms.Label();
+            this.accessKeyPriceBlankLbl = new System.Windows.Forms.Label();
+            this.accessKeyUsageTxt = new System.Windows.Forms.TextBox();
+            this.eaTestKeyLnk = new System.Windows.Forms.LinkLabel();
+            this.accessKeyPriceTxt = new System.Windows.Forms.TextBox();
+            this.accessKeyPriceLbl = new System.Windows.Forms.Label();
+            this.enrollmentTx = new System.Windows.Forms.TextBox();
+            this.accessKeyUsageLbl = new System.Windows.Forms.Label();
+            this.enrollmentKeyTxtLbl = new System.Windows.Forms.Label();
+            this.enrollmentNumLbl = new System.Windows.Forms.Label();
             this.dataTabBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.combinedDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusBottomLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusBottomStatus1 = new System.Windows.Forms.ToolStripProgressBar();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.mainTabs.SuspendLayout();
+            this.usageListTab.SuspendLayout();
             this.dataTabs.SuspendLayout();
             this.dataTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.usageReportDataGrid)).BeginInit();
-            this.rawJsonTab.SuspendLayout();
+            this.publicPricingTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.publicPricingDataGrid)).BeginInit();
             this.combinedTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.reconciledDataGrid)).BeginInit();
-            this.tabPage2.SuspendLayout();
+            this.rawJsonTab.SuspendLayout();
+            this.usageByMonthTab.SuspendLayout();
+            this.configTab.SuspendLayout();
+            this.accessKeysGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataTabBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.combinedDataBindingSource)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // mainTabs
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(13, 13);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1086, 626);
-            this.tabControl1.TabIndex = 0;
+            this.mainTabs.Controls.Add(this.usageListTab);
+            this.mainTabs.Controls.Add(this.usageByMonthTab);
+            this.mainTabs.Controls.Add(this.configTab);
+            this.mainTabs.Location = new System.Drawing.Point(13, 13);
+            this.mainTabs.Name = "mainTabs";
+            this.mainTabs.SelectedIndex = 0;
+            this.mainTabs.Size = new System.Drawing.Size(1158, 660);
+            this.mainTabs.TabIndex = 0;
             // 
-            // tabPage1
+            // usageListTab
             // 
-            this.tabPage1.Controls.Add(this.currentDataLabel);
-            this.tabPage1.Controls.Add(this.dataTabs);
-            this.tabPage1.Controls.Add(this.availReportTree);
-            this.tabPage1.Controls.Add(this.label10);
-            this.tabPage1.Controls.Add(this.linkLabel1);
-            this.tabPage1.Controls.Add(this.label9);
-            this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.getReportDataBtn);
-            this.tabPage1.Controls.Add(this.accessKeyTx);
-            this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.enrollmentTx);
-            this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1078, 600);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "UsageList";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.usageListTab.Controls.Add(this.exportTypeList);
+            this.usageListTab.Controls.Add(this.exportFormatLbl);
+            this.usageListTab.Controls.Add(this.exportView);
+            this.usageListTab.Controls.Add(this.currentDataLabel);
+            this.usageListTab.Controls.Add(this.dataTabs);
+            this.usageListTab.Controls.Add(this.availReportTree);
+            this.usageListTab.Controls.Add(this.availUsageReportLbl);
+            this.usageListTab.Controls.Add(this.dataDislayDateLbl);
+            this.usageListTab.Controls.Add(this.getReportDataBtn);
+            this.usageListTab.Location = new System.Drawing.Point(4, 22);
+            this.usageListTab.Name = "usageListTab";
+            this.usageListTab.Padding = new System.Windows.Forms.Padding(3);
+            this.usageListTab.Size = new System.Drawing.Size(1150, 634);
+            this.usageListTab.TabIndex = 0;
+            this.usageListTab.Text = "Usage List";
+            this.usageListTab.UseVisualStyleBackColor = true;
+            // 
+            // exportTypeList
+            // 
+            this.exportTypeList.FormattingEnabled = true;
+            this.exportTypeList.Items.AddRange(new object[] {
+            "CSV",
+            "JSON"});
+            this.exportTypeList.Location = new System.Drawing.Point(908, 590);
+            this.exportTypeList.Name = "exportTypeList";
+            this.exportTypeList.Size = new System.Drawing.Size(121, 21);
+            this.exportTypeList.TabIndex = 23;
+            this.exportTypeList.Text = "CSV";
+            // 
+            // exportFormatLbl
+            // 
+            this.exportFormatLbl.AutoSize = true;
+            this.exportFormatLbl.Location = new System.Drawing.Point(827, 593);
+            this.exportFormatLbl.Name = "exportFormatLbl";
+            this.exportFormatLbl.Size = new System.Drawing.Size(75, 13);
+            this.exportFormatLbl.TabIndex = 22;
+            this.exportFormatLbl.Text = "Export Format:";
+            // 
+            // exportView
+            // 
+            this.exportView.Location = new System.Drawing.Point(1046, 588);
+            this.exportView.Name = "exportView";
+            this.exportView.Size = new System.Drawing.Size(75, 23);
+            this.exportView.TabIndex = 18;
+            this.exportView.Text = "Export";
+            this.exportView.UseVisualStyleBackColor = true;
             // 
             // currentDataLabel
             // 
@@ -128,12 +187,13 @@
             // 
             this.dataTabs.CausesValidation = false;
             this.dataTabs.Controls.Add(this.dataTab);
-            this.dataTabs.Controls.Add(this.rawJsonTab);
+            this.dataTabs.Controls.Add(this.publicPricingTab);
             this.dataTabs.Controls.Add(this.combinedTab);
+            this.dataTabs.Controls.Add(this.rawJsonTab);
             this.dataTabs.Location = new System.Drawing.Point(292, 92);
             this.dataTabs.Name = "dataTabs";
             this.dataTabs.SelectedIndex = 0;
-            this.dataTabs.Size = new System.Drawing.Size(768, 490);
+            this.dataTabs.Size = new System.Drawing.Size(839, 490);
             this.dataTabs.TabIndex = 16;
             // 
             // dataTab
@@ -142,7 +202,7 @@
             this.dataTab.Location = new System.Drawing.Point(4, 22);
             this.dataTab.Name = "dataTab";
             this.dataTab.Padding = new System.Windows.Forms.Padding(3);
-            this.dataTab.Size = new System.Drawing.Size(760, 464);
+            this.dataTab.Size = new System.Drawing.Size(831, 464);
             this.dataTab.TabIndex = 0;
             this.dataTab.Text = "Data";
             this.dataTab.UseVisualStyleBackColor = true;
@@ -162,37 +222,149 @@
             this.usageReportDataGrid.ShowCellErrors = false;
             this.usageReportDataGrid.ShowEditingIcon = false;
             this.usageReportDataGrid.ShowRowErrors = false;
-            this.usageReportDataGrid.Size = new System.Drawing.Size(748, 452);
+            this.usageReportDataGrid.Size = new System.Drawing.Size(819, 452);
             this.usageReportDataGrid.TabIndex = 0;
             // 
-            // rawJsonTab
+            // publicPricingTab
             // 
-            this.rawJsonTab.Controls.Add(this.usageListJsonTx);
-            this.rawJsonTab.Location = new System.Drawing.Point(4, 22);
-            this.rawJsonTab.Name = "rawJsonTab";
-            this.rawJsonTab.Padding = new System.Windows.Forms.Padding(3);
-            this.rawJsonTab.Size = new System.Drawing.Size(760, 464);
-            this.rawJsonTab.TabIndex = 1;
-            this.rawJsonTab.Text = "Raw response";
-            this.rawJsonTab.UseVisualStyleBackColor = true;
+            this.publicPricingTab.Controls.Add(this.getPublicPricingBtn);
+            this.publicPricingTab.Controls.Add(this.regionLst);
+            this.publicPricingTab.Controls.Add(this.regionLbl);
+            this.publicPricingTab.Controls.Add(this.localeLst);
+            this.publicPricingTab.Controls.Add(this.localeLbl);
+            this.publicPricingTab.Controls.Add(this.currencyLbl);
+            this.publicPricingTab.Controls.Add(this.offerDetailsLnk);
+            this.publicPricingTab.Controls.Add(this.currencyLst);
+            this.publicPricingTab.Controls.Add(this.label1);
+            this.publicPricingTab.Controls.Add(this.offerCodeLst);
+            this.publicPricingTab.Controls.Add(this.publicPricingDataGrid);
+            this.publicPricingTab.Location = new System.Drawing.Point(4, 22);
+            this.publicPricingTab.Name = "publicPricingTab";
+            this.publicPricingTab.Size = new System.Drawing.Size(831, 464);
+            this.publicPricingTab.TabIndex = 3;
+            this.publicPricingTab.Text = "Public Pricing";
+            this.publicPricingTab.UseVisualStyleBackColor = true;
             // 
-            // usageListJsonTx
+            // getPublicPricingBtn
             // 
-            this.usageListJsonTx.CausesValidation = false;
-            this.usageListJsonTx.Location = new System.Drawing.Point(6, 6);
-            this.usageListJsonTx.Multiline = true;
-            this.usageListJsonTx.Name = "usageListJsonTx";
-            this.usageListJsonTx.ReadOnly = true;
-            this.usageListJsonTx.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.usageListJsonTx.Size = new System.Drawing.Size(748, 452);
-            this.usageListJsonTx.TabIndex = 7;
+            this.getPublicPricingBtn.Location = new System.Drawing.Point(669, 44);
+            this.getPublicPricingBtn.Name = "getPublicPricingBtn";
+            this.getPublicPricingBtn.Size = new System.Drawing.Size(112, 23);
+            this.getPublicPricingBtn.TabIndex = 11;
+            this.getPublicPricingBtn.Text = "Get Pricing";
+            this.getPublicPricingBtn.UseVisualStyleBackColor = true;
+            this.getPublicPricingBtn.Click += new System.EventHandler(this.getPublicPricingBtn_Click);
+            // 
+            // regionLst
+            // 
+            this.regionLst.FormattingEnabled = true;
+            this.regionLst.Items.AddRange(new object[] {
+            "US"});
+            this.regionLst.Location = new System.Drawing.Point(669, 16);
+            this.regionLst.Name = "regionLst";
+            this.regionLst.Size = new System.Drawing.Size(105, 21);
+            this.regionLst.TabIndex = 10;
+            // 
+            // regionLbl
+            // 
+            this.regionLbl.AutoSize = true;
+            this.regionLbl.Location = new System.Drawing.Point(619, 20);
+            this.regionLbl.Name = "regionLbl";
+            this.regionLbl.Size = new System.Drawing.Size(44, 13);
+            this.regionLbl.TabIndex = 9;
+            this.regionLbl.Text = "Region:";
+            // 
+            // localeLst
+            // 
+            this.localeLst.FormattingEnabled = true;
+            this.localeLst.Items.AddRange(new object[] {
+            "en-US"});
+            this.localeLst.Location = new System.Drawing.Point(476, 16);
+            this.localeLst.Name = "localeLst";
+            this.localeLst.Size = new System.Drawing.Size(105, 21);
+            this.localeLst.TabIndex = 8;
+            // 
+            // localeLbl
+            // 
+            this.localeLbl.AutoSize = true;
+            this.localeLbl.Location = new System.Drawing.Point(428, 20);
+            this.localeLbl.Name = "localeLbl";
+            this.localeLbl.Size = new System.Drawing.Size(42, 13);
+            this.localeLbl.TabIndex = 7;
+            this.localeLbl.Text = "Locale:";
+            // 
+            // currencyLbl
+            // 
+            this.currencyLbl.AutoSize = true;
+            this.currencyLbl.Location = new System.Drawing.Point(227, 20);
+            this.currencyLbl.Name = "currencyLbl";
+            this.currencyLbl.Size = new System.Drawing.Size(52, 13);
+            this.currencyLbl.TabIndex = 6;
+            this.currencyLbl.Text = "Currency:";
+            // 
+            // offerDetailsLnk
+            // 
+            this.offerDetailsLnk.AutoSize = true;
+            this.offerDetailsLnk.Location = new System.Drawing.Point(5, 44);
+            this.offerDetailsLnk.Name = "offerDetailsLnk";
+            this.offerDetailsLnk.Size = new System.Drawing.Size(199, 13);
+            this.offerDetailsLnk.TabIndex = 5;
+            this.offerDetailsLnk.TabStop = true;
+            this.offerDetailsLnk.Text = "Click to see Microsoft Azure Offer Details";
+            // 
+            // currencyLst
+            // 
+            this.currencyLst.FormattingEnabled = true;
+            this.currencyLst.Items.AddRange(new object[] {
+            "USD"});
+            this.currencyLst.Location = new System.Drawing.Point(285, 16);
+            this.currencyLst.Name = "currencyLst";
+            this.currencyLst.Size = new System.Drawing.Size(105, 21);
+            this.currencyLst.TabIndex = 4;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(5, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(73, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Offer Number:";
+            // 
+            // offerCodeLst
+            // 
+            this.offerCodeLst.FormattingEnabled = true;
+            this.offerCodeLst.Location = new System.Drawing.Point(84, 16);
+            this.offerCodeLst.Name = "offerCodeLst";
+            this.offerCodeLst.Size = new System.Drawing.Size(105, 21);
+            this.offerCodeLst.TabIndex = 2;
+            // 
+            // publicPricingDataGrid
+            // 
+            this.publicPricingDataGrid.AllowUserToAddRows = false;
+            this.publicPricingDataGrid.AllowUserToDeleteRows = false;
+            this.publicPricingDataGrid.AllowUserToOrderColumns = true;
+            this.publicPricingDataGrid.AllowUserToResizeRows = false;
+            this.publicPricingDataGrid.CausesValidation = false;
+            this.publicPricingDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.publicPricingDataGrid.Location = new System.Drawing.Point(5, 69);
+            this.publicPricingDataGrid.MultiSelect = false;
+            this.publicPricingDataGrid.Name = "publicPricingDataGrid";
+            this.publicPricingDataGrid.ReadOnly = true;
+            this.publicPricingDataGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.publicPricingDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.publicPricingDataGrid.ShowCellErrors = false;
+            this.publicPricingDataGrid.ShowEditingIcon = false;
+            this.publicPricingDataGrid.ShowRowErrors = false;
+            this.publicPricingDataGrid.Size = new System.Drawing.Size(821, 393);
+            this.publicPricingDataGrid.TabIndex = 1;
             // 
             // combinedTab
             // 
             this.combinedTab.Controls.Add(this.reconciledDataGrid);
             this.combinedTab.Location = new System.Drawing.Point(4, 22);
             this.combinedTab.Name = "combinedTab";
-            this.combinedTab.Size = new System.Drawing.Size(760, 464);
+            this.combinedTab.Size = new System.Drawing.Size(831, 464);
             this.combinedTab.TabIndex = 2;
             this.combinedTab.Text = "Combined";
             this.combinedTab.UseVisualStyleBackColor = true;
@@ -214,9 +386,31 @@
             this.reconciledDataGrid.ShowCellErrors = false;
             this.reconciledDataGrid.ShowEditingIcon = false;
             this.reconciledDataGrid.ShowRowErrors = false;
-            this.reconciledDataGrid.Size = new System.Drawing.Size(753, 460);
+            this.reconciledDataGrid.Size = new System.Drawing.Size(821, 460);
             this.reconciledDataGrid.TabIndex = 0;
             this.reconciledDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.reconciledDataGrid_CellContentClick);
+            // 
+            // rawJsonTab
+            // 
+            this.rawJsonTab.Controls.Add(this.usageListJsonTx);
+            this.rawJsonTab.Location = new System.Drawing.Point(4, 22);
+            this.rawJsonTab.Name = "rawJsonTab";
+            this.rawJsonTab.Padding = new System.Windows.Forms.Padding(3);
+            this.rawJsonTab.Size = new System.Drawing.Size(831, 464);
+            this.rawJsonTab.TabIndex = 1;
+            this.rawJsonTab.Text = "Raw response";
+            this.rawJsonTab.UseVisualStyleBackColor = true;
+            // 
+            // usageListJsonTx
+            // 
+            this.usageListJsonTx.CausesValidation = false;
+            this.usageListJsonTx.Location = new System.Drawing.Point(6, 6);
+            this.usageListJsonTx.Multiline = true;
+            this.usageListJsonTx.Name = "usageListJsonTx";
+            this.usageListJsonTx.ReadOnly = true;
+            this.usageListJsonTx.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.usageListJsonTx.Size = new System.Drawing.Size(748, 452);
+            this.usageListJsonTx.TabIndex = 7;
             // 
             // availReportTree
             // 
@@ -230,47 +424,27 @@
             this.availReportTree.TabIndex = 15;
             this.availReportTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.availReportTree_NodeMouseClick);
             // 
-            // label10
+            // availUsageReportLbl
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(21, 64);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(120, 13);
-            this.label10.TabIndex = 13;
-            this.label10.Text = "Available usage reports:";
+            this.availUsageReportLbl.AutoSize = true;
+            this.availUsageReportLbl.Location = new System.Drawing.Point(21, 64);
+            this.availUsageReportLbl.Name = "availUsageReportLbl";
+            this.availUsageReportLbl.Size = new System.Drawing.Size(120, 13);
+            this.availUsageReportLbl.TabIndex = 13;
+            this.availUsageReportLbl.Text = "Available usage reports:";
             // 
-            // linkLabel1
+            // dataDislayDateLbl
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(289, 32);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(175, 13);
-            this.linkLabel1.TabIndex = 11;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Get enrollment 100 test Access Key";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(123, 32);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(143, 13);
-            this.label9.TabIndex = 10;
-            this.label9.Text = "Enter \'100\' for test enrollment";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(289, 64);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(97, 13);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Displaying data for:";
+            this.dataDislayDateLbl.AutoSize = true;
+            this.dataDislayDateLbl.Location = new System.Drawing.Point(289, 64);
+            this.dataDislayDateLbl.Name = "dataDislayDateLbl";
+            this.dataDislayDateLbl.Size = new System.Drawing.Size(97, 13);
+            this.dataDislayDateLbl.TabIndex = 7;
+            this.dataDislayDateLbl.Text = "Displaying data for:";
             // 
             // getReportDataBtn
             // 
-            this.getReportDataBtn.Location = new System.Drawing.Point(972, 7);
+            this.getReportDataBtn.Location = new System.Drawing.Point(178, 583);
             this.getReportDataBtn.Name = "getReportDataBtn";
             this.getReportDataBtn.Size = new System.Drawing.Size(88, 23);
             this.getReportDataBtn.TabIndex = 5;
@@ -278,62 +452,28 @@
             this.getReportDataBtn.UseVisualStyleBackColor = true;
             this.getReportDataBtn.Click += new System.EventHandler(this.getReportDataBtn_Click);
             // 
-            // accessKeyTx
+            // usageByMonthTab
             // 
-            this.accessKeyTx.Location = new System.Drawing.Point(361, 9);
-            this.accessKeyTx.Name = "accessKeyTx";
-            this.accessKeyTx.Size = new System.Drawing.Size(605, 20);
-            this.accessKeyTx.TabIndex = 3;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(289, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(66, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Access Key:";
-            // 
-            // enrollmentTx
-            // 
-            this.enrollmentTx.Location = new System.Drawing.Point(126, 9);
-            this.enrollmentTx.Name = "enrollmentTx";
-            this.enrollmentTx.Size = new System.Drawing.Size(140, 20);
-            this.enrollmentTx.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(99, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Enrollment Number:";
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.formatCB);
-            this.tabPage2.Controls.Add(this.lblFormat);
-            this.tabPage2.Controls.Add(this.btnSaveReport);
-            this.tabPage2.Controls.Add(this.reportTypeCB);
-            this.tabPage2.Controls.Add(this.label8);
-            this.tabPage2.Controls.Add(this.monthCalendar);
-            this.tabPage2.Controls.Add(this.label7);
-            this.tabPage2.Controls.Add(this.label4);
-            this.tabPage2.Controls.Add(this.jsonMonthTx);
-            this.tabPage2.Controls.Add(this.button2);
-            this.tabPage2.Controls.Add(this.btnSendRequest);
-            this.tabPage2.Controls.Add(this.accessKeyMonthTx);
-            this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.enrollmentMonthTx);
-            this.tabPage2.Controls.Add(this.label6);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1078, 600);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "UsageByMonth";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.usageByMonthTab.Controls.Add(this.formatCB);
+            this.usageByMonthTab.Controls.Add(this.lblFormat);
+            this.usageByMonthTab.Controls.Add(this.btnSaveReport);
+            this.usageByMonthTab.Controls.Add(this.reportTypeCB);
+            this.usageByMonthTab.Controls.Add(this.reportTypeLbl);
+            this.usageByMonthTab.Controls.Add(this.monthCalendar);
+            this.usageByMonthTab.Controls.Add(this.label7);
+            this.usageByMonthTab.Controls.Add(this.jsonResponseLbl);
+            this.usageByMonthTab.Controls.Add(this.jsonMonthTx);
+            this.usageByMonthTab.Controls.Add(this.streamDownloadBtn);
+            this.usageByMonthTab.Controls.Add(this.btnSendRequest);
+            this.usageByMonthTab.Controls.Add(this.enrollmentMonthTx);
+            this.usageByMonthTab.Controls.Add(this.label6);
+            this.usageByMonthTab.Location = new System.Drawing.Point(4, 22);
+            this.usageByMonthTab.Name = "usageByMonthTab";
+            this.usageByMonthTab.Padding = new System.Windows.Forms.Padding(3);
+            this.usageByMonthTab.Size = new System.Drawing.Size(1150, 634);
+            this.usageByMonthTab.TabIndex = 1;
+            this.usageByMonthTab.Text = "Usage By Month";
+            this.usageByMonthTab.UseVisualStyleBackColor = true;
             // 
             // formatCB
             // 
@@ -381,14 +521,14 @@
             this.reportTypeCB.TabIndex = 18;
             this.reportTypeCB.Text = "Summary";
             // 
-            // label8
+            // reportTypeLbl
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(21, 223);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(69, 13);
-            this.label8.TabIndex = 17;
-            this.label8.Text = "Report Type:";
+            this.reportTypeLbl.AutoSize = true;
+            this.reportTypeLbl.Location = new System.Drawing.Point(21, 223);
+            this.reportTypeLbl.Name = "reportTypeLbl";
+            this.reportTypeLbl.Size = new System.Drawing.Size(69, 13);
+            this.reportTypeLbl.TabIndex = 17;
+            this.reportTypeLbl.Text = "Report Type:";
             // 
             // monthCalendar
             // 
@@ -405,14 +545,14 @@
             this.label7.TabIndex = 15;
             this.label7.Text = "Month:";
             // 
-            // label4
+            // jsonResponseLbl
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(309, 46);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(80, 13);
-            this.label4.TabIndex = 14;
-            this.label4.Text = "Json Response";
+            this.jsonResponseLbl.AutoSize = true;
+            this.jsonResponseLbl.Location = new System.Drawing.Point(309, 46);
+            this.jsonResponseLbl.Name = "jsonResponseLbl";
+            this.jsonResponseLbl.Size = new System.Drawing.Size(80, 13);
+            this.jsonResponseLbl.TabIndex = 14;
+            this.jsonResponseLbl.Text = "Json Response";
             // 
             // jsonMonthTx
             // 
@@ -424,15 +564,15 @@
             this.jsonMonthTx.Size = new System.Drawing.Size(748, 518);
             this.jsonMonthTx.TabIndex = 13;
             // 
-            // button2
+            // streamDownloadBtn
             // 
-            this.button2.Location = new System.Drawing.Point(935, 9);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(118, 23);
-            this.button2.TabIndex = 12;
-            this.button2.Text = "Stream Download";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.btnStreamDownload_Click);
+            this.streamDownloadBtn.Location = new System.Drawing.Point(935, 9);
+            this.streamDownloadBtn.Name = "streamDownloadBtn";
+            this.streamDownloadBtn.Size = new System.Drawing.Size(118, 23);
+            this.streamDownloadBtn.TabIndex = 12;
+            this.streamDownloadBtn.Text = "Stream Download";
+            this.streamDownloadBtn.UseVisualStyleBackColor = true;
+            this.streamDownloadBtn.Click += new System.EventHandler(this.btnStreamDownload_Click);
             // 
             // btnSendRequest
             // 
@@ -443,23 +583,6 @@
             this.btnSendRequest.Text = "Regular Download";
             this.btnSendRequest.UseVisualStyleBackColor = true;
             this.btnSendRequest.Click += new System.EventHandler(this.btnSendRequest_Click);
-            // 
-            // accessKeyMonthTx
-            // 
-            this.accessKeyMonthTx.Location = new System.Drawing.Point(375, 9);
-            this.accessKeyMonthTx.Name = "accessKeyMonthTx";
-            this.accessKeyMonthTx.Size = new System.Drawing.Size(431, 20);
-            this.accessKeyMonthTx.TabIndex = 11;
-            this.accessKeyMonthTx.Text = this.accessKeyTx.Text;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(303, 12);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(66, 13);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Access Key:";
             // 
             // enrollmentMonthTx
             // 
@@ -478,14 +601,202 @@
             this.label6.TabIndex = 8;
             this.label6.Text = "Enrollment Number:";
             // 
+            // configTab
+            // 
+            this.configTab.Controls.Add(this.accessKeysGroup);
+            this.configTab.Location = new System.Drawing.Point(4, 22);
+            this.configTab.Name = "configTab";
+            this.configTab.Size = new System.Drawing.Size(1150, 634);
+            this.configTab.TabIndex = 2;
+            this.configTab.Text = "Configuration";
+            this.configTab.UseVisualStyleBackColor = true;
+            // 
+            // accessKeysGroup
+            // 
+            this.accessKeysGroup.Controls.Add(this.savConifigBtn);
+            this.accessKeysGroup.Controls.Add(this.azureSharedSecretTxt);
+            this.accessKeysGroup.Controls.Add(this.azureSharedSecretLbl);
+            this.accessKeysGroup.Controls.Add(this.azureSubscriptionIdTxt);
+            this.accessKeysGroup.Controls.Add(this.azureSubscriptionIdLbl);
+            this.accessKeysGroup.Controls.Add(this.aadTenantIdTxt);
+            this.accessKeysGroup.Controls.Add(this.aadTenantIdLbl);
+            this.accessKeysGroup.Controls.Add(this.azureClientIdTxt);
+            this.accessKeysGroup.Controls.Add(this.azureClientIdLbl);
+            this.accessKeysGroup.Controls.Add(this.accessKeyPriceBlankLbl);
+            this.accessKeysGroup.Controls.Add(this.accessKeyUsageTxt);
+            this.accessKeysGroup.Controls.Add(this.eaTestKeyLnk);
+            this.accessKeysGroup.Controls.Add(this.accessKeyPriceTxt);
+            this.accessKeysGroup.Controls.Add(this.accessKeyPriceLbl);
+            this.accessKeysGroup.Controls.Add(this.enrollmentTx);
+            this.accessKeysGroup.Controls.Add(this.accessKeyUsageLbl);
+            this.accessKeysGroup.Controls.Add(this.enrollmentKeyTxtLbl);
+            this.accessKeysGroup.Controls.Add(this.enrollmentNumLbl);
+            this.accessKeysGroup.Location = new System.Drawing.Point(22, 18);
+            this.accessKeysGroup.Name = "accessKeysGroup";
+            this.accessKeysGroup.Size = new System.Drawing.Size(878, 333);
+            this.accessKeysGroup.TabIndex = 20;
+            this.accessKeysGroup.TabStop = false;
+            this.accessKeysGroup.Text = "Access Keys";
+            // 
+            // savConifigBtn
+            // 
+            this.savConifigBtn.Location = new System.Drawing.Point(667, 291);
+            this.savConifigBtn.Name = "savConifigBtn";
+            this.savConifigBtn.Size = new System.Drawing.Size(75, 23);
+            this.savConifigBtn.TabIndex = 33;
+            this.savConifigBtn.Text = "Save";
+            this.savConifigBtn.UseVisualStyleBackColor = true;
+            this.savConifigBtn.Click += new System.EventHandler(this.savConifigBtn_Click);
+            // 
+            // azureSharedSecretTxt
+            // 
+            this.azureSharedSecretTxt.Location = new System.Drawing.Point(137, 262);
+            this.azureSharedSecretTxt.Name = "azureSharedSecretTxt";
+            this.azureSharedSecretTxt.Size = new System.Drawing.Size(605, 20);
+            this.azureSharedSecretTxt.TabIndex = 32;
+            // 
+            // azureSharedSecretLbl
+            // 
+            this.azureSharedSecretLbl.AutoSize = true;
+            this.azureSharedSecretLbl.Location = new System.Drawing.Point(10, 262);
+            this.azureSharedSecretLbl.Name = "azureSharedSecretLbl";
+            this.azureSharedSecretLbl.Size = new System.Drawing.Size(78, 13);
+            this.azureSharedSecretLbl.TabIndex = 31;
+            this.azureSharedSecretLbl.Text = "Shared Secret:";
+            // 
+            // azureSubscriptionIdTxt
+            // 
+            this.azureSubscriptionIdTxt.Location = new System.Drawing.Point(137, 175);
+            this.azureSubscriptionIdTxt.Name = "azureSubscriptionIdTxt";
+            this.azureSubscriptionIdTxt.Size = new System.Drawing.Size(605, 20);
+            this.azureSubscriptionIdTxt.TabIndex = 30;
+            // 
+            // azureSubscriptionIdLbl
+            // 
+            this.azureSubscriptionIdLbl.AutoSize = true;
+            this.azureSubscriptionIdLbl.Location = new System.Drawing.Point(10, 175);
+            this.azureSubscriptionIdLbl.Name = "azureSubscriptionIdLbl";
+            this.azureSubscriptionIdLbl.Size = new System.Drawing.Size(80, 13);
+            this.azureSubscriptionIdLbl.TabIndex = 29;
+            this.azureSubscriptionIdLbl.Text = "Subscription Id:";
+            // 
+            // aadTenantIdTxt
+            // 
+            this.aadTenantIdTxt.Location = new System.Drawing.Point(137, 204);
+            this.aadTenantIdTxt.Name = "aadTenantIdTxt";
+            this.aadTenantIdTxt.Size = new System.Drawing.Size(605, 20);
+            this.aadTenantIdTxt.TabIndex = 30;
+            // 
+            // aadTenantIdLbl
+            // 
+            this.aadTenantIdLbl.AutoSize = true;
+            this.aadTenantIdLbl.Location = new System.Drawing.Point(10, 204);
+            this.aadTenantIdLbl.Name = "aadTenantIdLbl";
+            this.aadTenantIdLbl.Size = new System.Drawing.Size(56, 13);
+            this.aadTenantIdLbl.TabIndex = 29;
+            this.aadTenantIdLbl.Text = "Tenant Id:";
+            // 
+            // azureClientIdTxt
+            // 
+            this.azureClientIdTxt.Location = new System.Drawing.Point(137, 233);
+            this.azureClientIdTxt.Name = "azureClientIdTxt";
+            this.azureClientIdTxt.Size = new System.Drawing.Size(605, 20);
+            this.azureClientIdTxt.TabIndex = 30;
+            // 
+            // azureClientIdLbl
+            // 
+            this.azureClientIdLbl.AutoSize = true;
+            this.azureClientIdLbl.Location = new System.Drawing.Point(10, 233);
+            this.azureClientIdLbl.Name = "azureClientIdLbl";
+            this.azureClientIdLbl.Size = new System.Drawing.Size(48, 13);
+            this.azureClientIdLbl.TabIndex = 29;
+            this.azureClientIdLbl.Text = "Client Id:";
+            // 
+            // accessKeyPriceBlankLbl
+            // 
+            this.accessKeyPriceBlankLbl.AutoSize = true;
+            this.accessKeyPriceBlankLbl.Location = new System.Drawing.Point(137, 153);
+            this.accessKeyPriceBlankLbl.Name = "accessKeyPriceBlankLbl";
+            this.accessKeyPriceBlankLbl.Size = new System.Drawing.Size(170, 13);
+            this.accessKeyPriceBlankLbl.TabIndex = 28;
+            this.accessKeyPriceBlankLbl.Text = "Leave blank to use usage API key";
+            // 
+            // accessKeyUsageTxt
+            // 
+            this.accessKeyUsageTxt.Location = new System.Drawing.Point(137, 73);
+            this.accessKeyUsageTxt.Name = "accessKeyUsageTxt";
+            this.accessKeyUsageTxt.Size = new System.Drawing.Size(605, 20);
+            this.accessKeyUsageTxt.TabIndex = 27;
+            // 
+            // eaTestKeyLnk
+            // 
+            this.eaTestKeyLnk.AutoSize = true;
+            this.eaTestKeyLnk.Location = new System.Drawing.Point(137, 102);
+            this.eaTestKeyLnk.Name = "eaTestKeyLnk";
+            this.eaTestKeyLnk.Size = new System.Drawing.Size(175, 13);
+            this.eaTestKeyLnk.TabIndex = 25;
+            this.eaTestKeyLnk.TabStop = true;
+            this.eaTestKeyLnk.Text = "Get enrollment 100 test Access Key";
+            this.eaTestKeyLnk.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.eaTestKeyLnk_LinkClicked);
+            // 
+            // accessKeyPriceTxt
+            // 
+            this.accessKeyPriceTxt.Location = new System.Drawing.Point(137, 124);
+            this.accessKeyPriceTxt.Name = "accessKeyPriceTxt";
+            this.accessKeyPriceTxt.Size = new System.Drawing.Size(605, 20);
+            this.accessKeyPriceTxt.TabIndex = 23;
+            // 
+            // accessKeyPriceLbl
+            // 
+            this.accessKeyPriceLbl.AutoSize = true;
+            this.accessKeyPriceLbl.Location = new System.Drawing.Point(10, 124);
+            this.accessKeyPriceLbl.Name = "accessKeyPriceLbl";
+            this.accessKeyPriceLbl.Size = new System.Drawing.Size(113, 13);
+            this.accessKeyPriceLbl.TabIndex = 22;
+            this.accessKeyPriceLbl.Text = "Price API Access Key:";
+            // 
+            // enrollmentTx
+            // 
+            this.enrollmentTx.Location = new System.Drawing.Point(137, 24);
+            this.enrollmentTx.Name = "enrollmentTx";
+            this.enrollmentTx.Size = new System.Drawing.Size(140, 20);
+            this.enrollmentTx.TabIndex = 21;
+            // 
+            // accessKeyUsageLbl
+            // 
+            this.accessKeyUsageLbl.AutoSize = true;
+            this.accessKeyUsageLbl.Location = new System.Drawing.Point(10, 73);
+            this.accessKeyUsageLbl.Name = "accessKeyUsageLbl";
+            this.accessKeyUsageLbl.Size = new System.Drawing.Size(120, 13);
+            this.accessKeyUsageLbl.TabIndex = 26;
+            this.accessKeyUsageLbl.Text = "Usage API Access Key:";
+            // 
+            // enrollmentKeyTxtLbl
+            // 
+            this.enrollmentKeyTxtLbl.AutoSize = true;
+            this.enrollmentKeyTxtLbl.Location = new System.Drawing.Point(137, 51);
+            this.enrollmentKeyTxtLbl.Name = "enrollmentKeyTxtLbl";
+            this.enrollmentKeyTxtLbl.Size = new System.Drawing.Size(143, 13);
+            this.enrollmentKeyTxtLbl.TabIndex = 24;
+            this.enrollmentKeyTxtLbl.Text = "Enter \'100\' for test enrollment";
+            // 
+            // enrollmentNumLbl
+            // 
+            this.enrollmentNumLbl.AutoSize = true;
+            this.enrollmentNumLbl.Location = new System.Drawing.Point(10, 24);
+            this.enrollmentNumLbl.Name = "enrollmentNumLbl";
+            this.enrollmentNumLbl.Size = new System.Drawing.Size(99, 13);
+            this.enrollmentNumLbl.TabIndex = 20;
+            this.enrollmentNumLbl.Text = "Enrollment Number:";
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusBottomLabel1,
             this.statusBottomStatus1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 657);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 685);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1107, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1183, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -505,24 +816,31 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1107, 679);
+            this.ClientSize = new System.Drawing.Size(1183, 707);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.mainTabs);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EA Usage and pricing viewer";
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.mainTabs.ResumeLayout(false);
+            this.usageListTab.ResumeLayout(false);
+            this.usageListTab.PerformLayout();
             this.dataTabs.ResumeLayout(false);
             this.dataTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.usageReportDataGrid)).EndInit();
-            this.rawJsonTab.ResumeLayout(false);
-            this.rawJsonTab.PerformLayout();
+            this.publicPricingTab.ResumeLayout(false);
+            this.publicPricingTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.publicPricingDataGrid)).EndInit();
             this.combinedTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.reconciledDataGrid)).EndInit();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.rawJsonTab.ResumeLayout(false);
+            this.rawJsonTab.PerformLayout();
+            this.usageByMonthTab.ResumeLayout(false);
+            this.usageByMonthTab.PerformLayout();
+            this.configTab.ResumeLayout(false);
+            this.accessKeysGroup.ResumeLayout(false);
+            this.accessKeysGroup.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataTabBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.combinedDataBindingSource)).EndInit();
             this.statusStrip1.ResumeLayout(false);
@@ -534,33 +852,25 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TabControl mainTabs;
+        private System.Windows.Forms.TabPage usageListTab;
+        private System.Windows.Forms.Label dataDislayDateLbl;
         private System.Windows.Forms.Button getReportDataBtn;
-        private System.Windows.Forms.TextBox accessKeyTx;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox enrollmentTx;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage usageByMonthTab;
         private System.Windows.Forms.MonthCalendar monthCalendar;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label jsonResponseLbl;
         private System.Windows.Forms.TextBox jsonMonthTx;
         private System.Windows.Forms.Button btnSendRequest;
-        private System.Windows.Forms.TextBox accessKeyMonthTx;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox enrollmentMonthTx;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox reportTypeCB;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label reportTypeLbl;
         private System.Windows.Forms.Button btnSaveReport;
         private System.Windows.Forms.ComboBox formatCB;
         private System.Windows.Forms.Label lblFormat;
-        private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button streamDownloadBtn;
+        private System.Windows.Forms.Label availUsageReportLbl;
         private System.Windows.Forms.TreeView availReportTree;
         private System.Windows.Forms.TabControl dataTabs;
         private System.Windows.Forms.TabPage dataTab;
@@ -575,6 +885,41 @@
         private System.Windows.Forms.ToolStripProgressBar statusBottomStatus1;
         private System.Windows.Forms.BindingSource dataTabBindingSource;
         private System.Windows.Forms.BindingSource combinedDataBindingSource;
+        private System.Windows.Forms.Button exportView;
+        private System.Windows.Forms.TabPage publicPricingTab;
+        private System.Windows.Forms.TabPage configTab;
+        private System.Windows.Forms.GroupBox accessKeysGroup;
+        private System.Windows.Forms.TextBox accessKeyUsageTxt;
+        private System.Windows.Forms.LinkLabel eaTestKeyLnk;
+        private System.Windows.Forms.TextBox accessKeyPriceTxt;
+        private System.Windows.Forms.Label accessKeyPriceLbl;
+        private System.Windows.Forms.TextBox enrollmentTx;
+        private System.Windows.Forms.Label accessKeyUsageLbl;
+        private System.Windows.Forms.Label enrollmentKeyTxtLbl;
+        private System.Windows.Forms.Label enrollmentNumLbl;
+        private System.Windows.Forms.ComboBox exportTypeList;
+        private System.Windows.Forms.Label exportFormatLbl;
+        private System.Windows.Forms.Label accessKeyPriceBlankLbl;
+        private System.Windows.Forms.DataGridView publicPricingDataGrid;
+        private System.Windows.Forms.LinkLabel offerDetailsLnk;
+        private System.Windows.Forms.ComboBox currencyLst;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox offerCodeLst;
+        private System.Windows.Forms.TextBox azureSharedSecretTxt;
+        private System.Windows.Forms.Label azureSharedSecretLbl;
+        private System.Windows.Forms.TextBox azureClientIdTxt;
+        private System.Windows.Forms.Label azureClientIdLbl;
+        private System.Windows.Forms.Label currencyLbl;
+        private System.Windows.Forms.Button getPublicPricingBtn;
+        private System.Windows.Forms.ComboBox regionLst;
+        private System.Windows.Forms.Label regionLbl;
+        private System.Windows.Forms.ComboBox localeLst;
+        private System.Windows.Forms.Label localeLbl;
+        private System.Windows.Forms.Button savConifigBtn;
+        private System.Windows.Forms.TextBox aadTenantIdTxt;
+        private System.Windows.Forms.Label aadTenantIdLbl;
+        private System.Windows.Forms.TextBox azureSubscriptionIdTxt;
+        private System.Windows.Forms.Label azureSubscriptionIdLbl;
     }
 }
 
