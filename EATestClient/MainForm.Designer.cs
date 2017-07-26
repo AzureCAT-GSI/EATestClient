@@ -73,16 +73,19 @@
             this.enrollmentMonthTx = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.configTab = new System.Windows.Forms.TabPage();
-            this.accessKeysGroup = new System.Windows.Forms.GroupBox();
-            this.savConifigBtn = new System.Windows.Forms.Button();
+            this.saveConifigBtn = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.azureSharedSecretTxt = new System.Windows.Forms.TextBox();
             this.azureSharedSecretLbl = new System.Windows.Forms.Label();
             this.azureSubscriptionIdTxt = new System.Windows.Forms.TextBox();
-            this.azureSubscriptionIdLbl = new System.Windows.Forms.Label();
-            this.aadTenantIdTxt = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.azureTenantIdTxt = new System.Windows.Forms.TextBox();
             this.aadTenantIdLbl = new System.Windows.Forms.Label();
             this.azureClientIdTxt = new System.Windows.Forms.TextBox();
             this.azureClientIdLbl = new System.Windows.Forms.Label();
+            this.accessKeysGroup = new System.Windows.Forms.GroupBox();
+            this.eaSubscriptionIdTxt = new System.Windows.Forms.TextBox();
+            this.azureSubscriptionIdLbl = new System.Windows.Forms.Label();
             this.accessKeyPriceBlankLbl = new System.Windows.Forms.Label();
             this.accessKeyUsageTxt = new System.Windows.Forms.TextBox();
             this.eaTestKeyLnk = new System.Windows.Forms.LinkLabel();
@@ -109,6 +112,7 @@
             this.rawJsonTab.SuspendLayout();
             this.usageByMonthTab.SuspendLayout();
             this.configTab.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.accessKeysGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataTabBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.combinedDataBindingSource)).BeginInit();
@@ -174,6 +178,7 @@
             this.exportView.TabIndex = 18;
             this.exportView.Text = "Export";
             this.exportView.UseVisualStyleBackColor = true;
+            this.exportView.Click += new System.EventHandler(this.exportView_Click);
             // 
             // currentDataLabel
             // 
@@ -603,6 +608,8 @@
             // 
             // configTab
             // 
+            this.configTab.Controls.Add(this.saveConifigBtn);
+            this.configTab.Controls.Add(this.groupBox1);
             this.configTab.Controls.Add(this.accessKeysGroup);
             this.configTab.Location = new System.Drawing.Point(4, 22);
             this.configTab.Name = "configTab";
@@ -611,17 +618,101 @@
             this.configTab.Text = "Configuration";
             this.configTab.UseVisualStyleBackColor = true;
             // 
+            // saveConifigBtn
+            // 
+            this.saveConifigBtn.Location = new System.Drawing.Point(719, 432);
+            this.saveConifigBtn.Name = "saveConifigBtn";
+            this.saveConifigBtn.Size = new System.Drawing.Size(75, 23);
+            this.saveConifigBtn.TabIndex = 43;
+            this.saveConifigBtn.Text = "Save";
+            this.saveConifigBtn.UseVisualStyleBackColor = true;
+            this.saveConifigBtn.Click += new System.EventHandler(this.saveConifigBtn_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.azureSharedSecretTxt);
+            this.groupBox1.Controls.Add(this.azureSharedSecretLbl);
+            this.groupBox1.Controls.Add(this.azureSubscriptionIdTxt);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.azureTenantIdTxt);
+            this.groupBox1.Controls.Add(this.aadTenantIdLbl);
+            this.groupBox1.Controls.Add(this.azureClientIdTxt);
+            this.groupBox1.Controls.Add(this.azureClientIdLbl);
+            this.groupBox1.Location = new System.Drawing.Point(22, 258);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(772, 159);
+            this.groupBox1.TabIndex = 21;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Access Keys (Azure Public)";
+            // 
+            // azureSharedSecretTxt
+            // 
+            this.azureSharedSecretTxt.Location = new System.Drawing.Point(137, 117);
+            this.azureSharedSecretTxt.Name = "azureSharedSecretTxt";
+            this.azureSharedSecretTxt.Size = new System.Drawing.Size(605, 20);
+            this.azureSharedSecretTxt.TabIndex = 41;
+            // 
+            // azureSharedSecretLbl
+            // 
+            this.azureSharedSecretLbl.AutoSize = true;
+            this.azureSharedSecretLbl.Location = new System.Drawing.Point(10, 117);
+            this.azureSharedSecretLbl.Name = "azureSharedSecretLbl";
+            this.azureSharedSecretLbl.Size = new System.Drawing.Size(78, 13);
+            this.azureSharedSecretLbl.TabIndex = 40;
+            this.azureSharedSecretLbl.Text = "Shared Secret:";
+            // 
+            // azureSubscriptionIdTxt
+            // 
+            this.azureSubscriptionIdTxt.Location = new System.Drawing.Point(137, 33);
+            this.azureSubscriptionIdTxt.Name = "azureSubscriptionIdTxt";
+            this.azureSubscriptionIdTxt.Size = new System.Drawing.Size(605, 20);
+            this.azureSubscriptionIdTxt.TabIndex = 37;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(10, 33);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(80, 13);
+            this.label2.TabIndex = 34;
+            this.label2.Text = "Subscription Id:";
+            // 
+            // azureTenantIdTxt
+            // 
+            this.azureTenantIdTxt.Location = new System.Drawing.Point(137, 59);
+            this.azureTenantIdTxt.Name = "azureTenantIdTxt";
+            this.azureTenantIdTxt.Size = new System.Drawing.Size(605, 20);
+            this.azureTenantIdTxt.TabIndex = 38;
+            // 
+            // aadTenantIdLbl
+            // 
+            this.aadTenantIdLbl.AutoSize = true;
+            this.aadTenantIdLbl.Location = new System.Drawing.Point(10, 59);
+            this.aadTenantIdLbl.Name = "aadTenantIdLbl";
+            this.aadTenantIdLbl.Size = new System.Drawing.Size(56, 13);
+            this.aadTenantIdLbl.TabIndex = 35;
+            this.aadTenantIdLbl.Text = "Tenant Id:";
+            // 
+            // azureClientIdTxt
+            // 
+            this.azureClientIdTxt.Location = new System.Drawing.Point(137, 88);
+            this.azureClientIdTxt.Name = "azureClientIdTxt";
+            this.azureClientIdTxt.Size = new System.Drawing.Size(605, 20);
+            this.azureClientIdTxt.TabIndex = 39;
+            // 
+            // azureClientIdLbl
+            // 
+            this.azureClientIdLbl.AutoSize = true;
+            this.azureClientIdLbl.Location = new System.Drawing.Point(10, 88);
+            this.azureClientIdLbl.Name = "azureClientIdLbl";
+            this.azureClientIdLbl.Size = new System.Drawing.Size(48, 13);
+            this.azureClientIdLbl.TabIndex = 36;
+            this.azureClientIdLbl.Text = "Client Id:";
+            // 
             // accessKeysGroup
             // 
-            this.accessKeysGroup.Controls.Add(this.savConifigBtn);
-            this.accessKeysGroup.Controls.Add(this.azureSharedSecretTxt);
-            this.accessKeysGroup.Controls.Add(this.azureSharedSecretLbl);
-            this.accessKeysGroup.Controls.Add(this.azureSubscriptionIdTxt);
+            this.accessKeysGroup.Controls.Add(this.eaSubscriptionIdTxt);
             this.accessKeysGroup.Controls.Add(this.azureSubscriptionIdLbl);
-            this.accessKeysGroup.Controls.Add(this.aadTenantIdTxt);
-            this.accessKeysGroup.Controls.Add(this.aadTenantIdLbl);
-            this.accessKeysGroup.Controls.Add(this.azureClientIdTxt);
-            this.accessKeysGroup.Controls.Add(this.azureClientIdLbl);
             this.accessKeysGroup.Controls.Add(this.accessKeyPriceBlankLbl);
             this.accessKeysGroup.Controls.Add(this.accessKeyUsageTxt);
             this.accessKeysGroup.Controls.Add(this.eaTestKeyLnk);
@@ -633,43 +724,17 @@
             this.accessKeysGroup.Controls.Add(this.enrollmentNumLbl);
             this.accessKeysGroup.Location = new System.Drawing.Point(22, 18);
             this.accessKeysGroup.Name = "accessKeysGroup";
-            this.accessKeysGroup.Size = new System.Drawing.Size(878, 333);
+            this.accessKeysGroup.Size = new System.Drawing.Size(772, 223);
             this.accessKeysGroup.TabIndex = 20;
             this.accessKeysGroup.TabStop = false;
-            this.accessKeysGroup.Text = "Access Keys";
+            this.accessKeysGroup.Text = "Access Keys (EA Portal)";
             // 
-            // savConifigBtn
+            // eaSubscriptionIdTxt
             // 
-            this.savConifigBtn.Location = new System.Drawing.Point(667, 291);
-            this.savConifigBtn.Name = "savConifigBtn";
-            this.savConifigBtn.Size = new System.Drawing.Size(75, 23);
-            this.savConifigBtn.TabIndex = 33;
-            this.savConifigBtn.Text = "Save";
-            this.savConifigBtn.UseVisualStyleBackColor = true;
-            this.savConifigBtn.Click += new System.EventHandler(this.savConifigBtn_Click);
-            // 
-            // azureSharedSecretTxt
-            // 
-            this.azureSharedSecretTxt.Location = new System.Drawing.Point(137, 262);
-            this.azureSharedSecretTxt.Name = "azureSharedSecretTxt";
-            this.azureSharedSecretTxt.Size = new System.Drawing.Size(605, 20);
-            this.azureSharedSecretTxt.TabIndex = 32;
-            // 
-            // azureSharedSecretLbl
-            // 
-            this.azureSharedSecretLbl.AutoSize = true;
-            this.azureSharedSecretLbl.Location = new System.Drawing.Point(10, 262);
-            this.azureSharedSecretLbl.Name = "azureSharedSecretLbl";
-            this.azureSharedSecretLbl.Size = new System.Drawing.Size(78, 13);
-            this.azureSharedSecretLbl.TabIndex = 31;
-            this.azureSharedSecretLbl.Text = "Shared Secret:";
-            // 
-            // azureSubscriptionIdTxt
-            // 
-            this.azureSubscriptionIdTxt.Location = new System.Drawing.Point(137, 175);
-            this.azureSubscriptionIdTxt.Name = "azureSubscriptionIdTxt";
-            this.azureSubscriptionIdTxt.Size = new System.Drawing.Size(605, 20);
-            this.azureSubscriptionIdTxt.TabIndex = 30;
+            this.eaSubscriptionIdTxt.Location = new System.Drawing.Point(137, 175);
+            this.eaSubscriptionIdTxt.Name = "eaSubscriptionIdTxt";
+            this.eaSubscriptionIdTxt.Size = new System.Drawing.Size(605, 20);
+            this.eaSubscriptionIdTxt.TabIndex = 30;
             // 
             // azureSubscriptionIdLbl
             // 
@@ -679,38 +744,6 @@
             this.azureSubscriptionIdLbl.Size = new System.Drawing.Size(80, 13);
             this.azureSubscriptionIdLbl.TabIndex = 29;
             this.azureSubscriptionIdLbl.Text = "Subscription Id:";
-            // 
-            // aadTenantIdTxt
-            // 
-            this.aadTenantIdTxt.Location = new System.Drawing.Point(137, 204);
-            this.aadTenantIdTxt.Name = "aadTenantIdTxt";
-            this.aadTenantIdTxt.Size = new System.Drawing.Size(605, 20);
-            this.aadTenantIdTxt.TabIndex = 30;
-            // 
-            // aadTenantIdLbl
-            // 
-            this.aadTenantIdLbl.AutoSize = true;
-            this.aadTenantIdLbl.Location = new System.Drawing.Point(10, 204);
-            this.aadTenantIdLbl.Name = "aadTenantIdLbl";
-            this.aadTenantIdLbl.Size = new System.Drawing.Size(56, 13);
-            this.aadTenantIdLbl.TabIndex = 29;
-            this.aadTenantIdLbl.Text = "Tenant Id:";
-            // 
-            // azureClientIdTxt
-            // 
-            this.azureClientIdTxt.Location = new System.Drawing.Point(137, 233);
-            this.azureClientIdTxt.Name = "azureClientIdTxt";
-            this.azureClientIdTxt.Size = new System.Drawing.Size(605, 20);
-            this.azureClientIdTxt.TabIndex = 30;
-            // 
-            // azureClientIdLbl
-            // 
-            this.azureClientIdLbl.AutoSize = true;
-            this.azureClientIdLbl.Location = new System.Drawing.Point(10, 233);
-            this.azureClientIdLbl.Name = "azureClientIdLbl";
-            this.azureClientIdLbl.Size = new System.Drawing.Size(48, 13);
-            this.azureClientIdLbl.TabIndex = 29;
-            this.azureClientIdLbl.Text = "Client Id:";
             // 
             // accessKeyPriceBlankLbl
             // 
@@ -839,6 +872,8 @@
             this.usageByMonthTab.ResumeLayout(false);
             this.usageByMonthTab.PerformLayout();
             this.configTab.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.accessKeysGroup.ResumeLayout(false);
             this.accessKeysGroup.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataTabBindingSource)).EndInit();
@@ -905,21 +940,24 @@
         private System.Windows.Forms.ComboBox currencyLst;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox offerCodeLst;
-        private System.Windows.Forms.TextBox azureSharedSecretTxt;
-        private System.Windows.Forms.Label azureSharedSecretLbl;
-        private System.Windows.Forms.TextBox azureClientIdTxt;
-        private System.Windows.Forms.Label azureClientIdLbl;
         private System.Windows.Forms.Label currencyLbl;
         private System.Windows.Forms.Button getPublicPricingBtn;
         private System.Windows.Forms.ComboBox regionLst;
         private System.Windows.Forms.Label regionLbl;
         private System.Windows.Forms.ComboBox localeLst;
         private System.Windows.Forms.Label localeLbl;
-        private System.Windows.Forms.Button savConifigBtn;
-        private System.Windows.Forms.TextBox aadTenantIdTxt;
-        private System.Windows.Forms.Label aadTenantIdLbl;
-        private System.Windows.Forms.TextBox azureSubscriptionIdTxt;
+        private System.Windows.Forms.TextBox eaSubscriptionIdTxt;
         private System.Windows.Forms.Label azureSubscriptionIdLbl;
+        private System.Windows.Forms.Button saveConifigBtn;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox azureSharedSecretTxt;
+        private System.Windows.Forms.Label azureSharedSecretLbl;
+        private System.Windows.Forms.TextBox azureSubscriptionIdTxt;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox azureTenantIdTxt;
+        private System.Windows.Forms.Label aadTenantIdLbl;
+        private System.Windows.Forms.TextBox azureClientIdTxt;
+        private System.Windows.Forms.Label azureClientIdLbl;
     }
 }
 

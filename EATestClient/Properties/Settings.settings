@@ -8,15 +8,6 @@
     <Setting Name="SubscriptionId" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="AADTenantId" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="AADClientId" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="AADClientSecret" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="AzureOfferDetailsUrl" Type="System.String" Scope="Application">
       <Value Profile="(Default)">https://azure.microsoft.com/en-us/support/legal/offer-details/</Value>
     </Setting>
@@ -46,6 +37,18 @@
     </Setting>
     <Setting Name="TestEnrollmentKeyUrl" Type="System.String" Scope="User">
       <Value Profile="(Default)">https://automaticbillingspec.blob.core.windows.net/spec/TestEnrollmentUsageApiKey.txt</Value>
+    </Setting>
+    <Setting Name="AADTenantId" Type="System.String" Scope="User">
+      <Value Profile="(Default)">72f988bf-86f1-41af-91ab-2d7cd011db47</Value>
+    </Setting>
+    <Setting Name="AADClientId" Type="System.String" Scope="User">
+      <Value Profile="(Default)">698be4a1-c5f1-46b3-8fe4-e2ac3fe5e385</Value>
+    </Setting>
+    <Setting Name="AADClientSecret" Type="System.String" Scope="User">
+      <Value Profile="(Default)">cfO9t8aOOA2Sjm/7h6XU9dQ0+AoBxkZQypmRiW+9V8s=</Value>
+    </Setting>
+    <Setting Name="ManagementTokenAudience" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://management.core.windows.net/</Value>
     </Setting>
   </Settings>
 </SettingsFile>

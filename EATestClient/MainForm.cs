@@ -71,8 +71,9 @@ namespace EATestClient
             updateStatus("Initializing settings ...", true);
             Settings curAppSettings = Settings.Default;
             
-            eaTestKeyLnk.Links.Add(new LinkLabel.Link() { LinkData = curAppSettings.TestEnrollmentKeyUrl });
-            
+            //eaTestKeyLnk.Links.Add(new LinkLabel.Link() { LinkData = curAppSettings.TestEnrollmentKeyUrl });
+
+
             string ujwt = curAppSettings["AccessKeyUsage"]?.ToString();
             if (!string.IsNullOrEmpty(ujwt))
             {
@@ -99,17 +100,30 @@ namespace EATestClient
                 enrollmentTx.Text = currentConfig.EnrollmentNumber;
             }
 
+            currentConfig.Region = curAppSettings["DefaultRegion"]?.ToString();
+            if (!string.IsNullOrEmpty(currentConfig.Region))
+            {
+                enrollmentTx.Text = currentConfig.Region;
+            }
+            else
+            {
+                //Set a default region
+                currentConfig.Region = RuntimeConstants.DefaultAzureRegion;
+            }
+
             currentConfig.SubscriptionId = curAppSettings["SubscriptionId"]?.ToString();
-            azureSubscriptionIdTxt.Text = currentConfig.SubscriptionId;
+            eaSubscriptionIdTxt.Text = currentConfig.SubscriptionId;
 
             currentConfig.TenantId = curAppSettings["AADtenantId"]?.ToString();
-            aadTenantIdTxt.Text = currentConfig.TenantId;
+            azureTenantIdTxt.Text = currentConfig.TenantId;
 
             currentConfig.ClientId = curAppSettings["AADClientId"]?.ToString();
             azureClientIdTxt.Text = currentConfig.ClientId;
 
             currentConfig.SharedSecret = curAppSettings["AADClientSecret"]?.ToString();
             azureSharedSecretTxt.Text = currentConfig.SharedSecret;
+
+            currentConfig.ManagementTokenAudience = curAppSettings["ManagementTokenAudience"]?.ToString();
 
             bindOfferCodes();
             updateStatus("Settings initialized ...");
@@ -535,12 +549,11 @@ namespace EATestClient
                 string pricingDataJson = await GetEnrollmentUsageByMonth(currentReportDate, UsageReportType.PriceSheet, currentConfig.EnrollmentNumber, currentToken.Token, "json");
                 List<EAPriceSheetItem> priceListItems = JsonConvert.DeserializeObject<List<EAPriceSheetItem>>(pricingDataJson);
 
-                //TODO
-                //Get Azure Prices
-                BearerToken bears = Utils.GetAccessTokenFromAAD(currentConfig.TenantId, currentConfig.ClientId, currentConfig.SharedSecret, currentConfig.TenantId ).Result;
+                //TODO: Get Azure Prices
+                ////BearerToken bears = Utils.GetAccessTokenFromAAD(currentConfig.TenantId, currentConfig.ClientId, currentConfig.SharedSecret, currentConfig.ManagementTokenAudience).Result;
 
-                string azurePricingJson = await GetAzureRateCard(bears, currentConfig.SubscriptionId, currentConfig.AzureOfferCode, currentConfig.Currency, currentConfig.Locale, currentConfig.Region);
-                List<AzureRateCard> azurePrices = JsonConvert.DeserializeObject<List<AzureRateCard>>(azurePricingJson);
+                ////string azurePricingJson = await GetAzureRateCard(bears, currentConfig.SubscriptionId, currentConfig.AzureOfferCode, currentConfig.Currency, currentConfig.Locale, currentConfig.Region);
+                ////List<AzureRateCard> azurePrices = JsonConvert.DeserializeObject<List<AzureRateCard>>(azurePricingJson);
 
 
                 updateStatus("Data recieved, combining datasets ...", true);
@@ -813,7 +826,7 @@ namespace EATestClient
             using (new WaitCursor())
             {
                 updateStatus("Fetching data ...", true);
-                BearerToken bears = Utils.GetAccessTokenFromAAD(currentConfig.TenantId, currentConfig.ClientId, currentConfig.SharedSecret, currentConfig.ResourceUri).Result;
+                BearerToken bears = Utils.GetAccessTokenFromAAD(currentConfig.TenantId, currentConfig.ClientId, currentConfig.SharedSecret, currentConfig.ManagementTokenAudience).Result;
                 string azPricingDataJson = await GetAzureRateCard(bears, currentConfig.SubscriptionId, ((AzureOfferCode)offerCodeLst.SelectedItem).OfferNumber, currencyLst.SelectedItem.ToString(), localeLst.SelectedItem.ToString(), regionLst.SelectedItem.ToString());
                 List<AzureRateCard> azurePrices = JsonConvert.DeserializeObject<List<AzureRateCard>>(azPricingDataJson);
 
@@ -853,13 +866,10 @@ namespace EATestClient
 
         private void eaTestKeyLnk_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (e.Link != null)
-            {
-                Process.Start(e.Link.LinkData as string);
-            }
+            Process.Start(e.Link.LinkData as string);
         }
 
-        private void savConifigBtn_Click(object sender, EventArgs e)
+        private void saveConifigBtn_Click(object sender, EventArgs e)
         {
             //Update the currrent config and save
             Settings appSettings = Settings.Default;
@@ -867,7 +877,7 @@ namespace EATestClient
 
             appSettings.AADClientSecret = azureSharedSecretTxt.Text;
 
-            appSettings.AADTenantId = aadTenantIdTxt.Text;
+            appSettings.AADTenantId = azureTenantIdTxt.Text;
 
             appSettings.AccessKeyBilling = accessKeyPriceTxt.Text;
 
@@ -881,17 +891,22 @@ namespace EATestClient
 
             appSettings.EnrollmentNumber = enrollmentTx.Text;
 
-            appSettings.SubscriptionId = azureSubscriptionIdTxt.Text;
+            appSettings.SubscriptionId = eaSubscriptionIdTxt.Text;
 
             appSettings.Save();
 
-            //initSettings();
+            initSettings();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
             initSettings();
             initValidators();
+        }
+
+        private void exportView_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

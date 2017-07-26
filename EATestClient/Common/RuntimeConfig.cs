@@ -21,5 +21,7 @@ namespace EATestClient.Common
         public string TenantId { get; set; }
         public string BillingAccessKey { get; internal set; }
         public string ResourceUri { get { return "https://microsoft.onmicrosoft.com/9dd79774-c43d-4400-a643-daa41c1bd484"; } set { } }
+
+        public string ManagementTokenAudience { get; internal set; }
     }
 }

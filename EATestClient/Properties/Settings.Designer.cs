@@ -47,42 +47,6 @@ namespace EATestClient.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string AADTenantId {
-            get {
-                return ((string)(this["AADTenantId"]));
-            }
-            set {
-                this["AADTenantId"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string AADClientId {
-            get {
-                return ((string)(this["AADClientId"]));
-            }
-            set {
-                this["AADClientId"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string AADClientSecret {
-            get {
-                return ((string)(this["AADClientSecret"]));
-            }
-            set {
-                this["AADClientSecret"] = value;
-            }
-        }
-        
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("https://azure.microsoft.com/en-us/support/legal/offer-details/")]
@@ -195,6 +159,54 @@ namespace EATestClient.Properties {
             }
             set {
                 this["TestEnrollmentKeyUrl"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("72f988bf-86f1-41af-91ab-2d7cd011db47")]
+        public string AADTenantId {
+            get {
+                return ((string)(this["AADTenantId"]));
+            }
+            set {
+                this["AADTenantId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("698be4a1-c5f1-46b3-8fe4-e2ac3fe5e385")]
+        public string AADClientId {
+            get {
+                return ((string)(this["AADClientId"]));
+            }
+            set {
+                this["AADClientId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("cfO9t8aOOA2Sjm/7h6XU9dQ0+AoBxkZQypmRiW+9V8s=")]
+        public string AADClientSecret {
+            get {
+                return ((string)(this["AADClientSecret"]));
+            }
+            set {
+                this["AADClientSecret"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://management.core.windows.net/")]
+        public string ManagementTokenAudience {
+            get {
+                return ((string)(this["ManagementTokenAudience"]));
+            }
+            set {
+                this["ManagementTokenAudience"] = value;
             }
         }
     }
