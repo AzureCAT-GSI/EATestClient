@@ -71,9 +71,8 @@ namespace EATestClient
             updateStatus("Initializing settings ...", true);
             Settings curAppSettings = Settings.Default;
             
-            //eaTestKeyLnk.Links.Add(new LinkLabel.Link() { LinkData = curAppSettings.TestEnrollmentKeyUrl });
-
-
+            eaTestKeyLnk.Links.Add(new LinkLabel.Link() { LinkData = curAppSettings.TestEnrollmentKeyUrl });
+            
             string ujwt = curAppSettings["AccessKeyUsage"]?.ToString();
             if (!string.IsNullOrEmpty(ujwt))
             {
@@ -854,7 +853,10 @@ namespace EATestClient
 
         private void eaTestKeyLnk_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start(e.Link.LinkData as string);
+            if (e.Link != null)
+            {
+                Process.Start(e.Link.LinkData as string);
+            }
         }
 
         private void savConifigBtn_Click(object sender, EventArgs e)
@@ -883,7 +885,7 @@ namespace EATestClient
 
             appSettings.Save();
 
-            initSettings();
+            //initSettings();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
